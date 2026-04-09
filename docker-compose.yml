@@ -1,0 +1,110 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: alan-db
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - alan-network
+
+  strapi:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: alan-backend
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_HOST: postgres
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      APP_KEYS: ${APP_KEYS}
+      NODE_ENV: ${NODE_ENV}
+      ## Optionnel - Cloudinary
+      # CLOUDINARY_NAME: ${CLOUDINARY_NAME}
+      # CLOUDINARY_KEY: ${CLOUDINARY_KEY}
+      # CLOUDINARY_SECRET: ${CLOUDINARY_SECRET}
+    volumes:
+      - ./backend/public/uploads:/opt/app/public/uploads
+    ports:
+      - "1337:1337"
+    networks:
+      - alan-network
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: alan-frontend
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NEXT_PUBLIC_STRAPI_URL: ${NEXT_PUBLIC_STRAPI_URL}
+    ports:
+      - "3000:3000"
+    networks:
+      - alan-network
+    depends_on:
+      - strapi
+
+  ### OPTIONNEL MAIS RECOMMANDÉ: Nginx Proxy Manager
+  ### Pour gérer facilement vos domaines et certificats SSL (HTTPS)
+  npm:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: alan-npm
+    restart: unless-stopped
+    ports:
+      - '80:80' # HTTP Public Port
+      - '443:443' # HTTPS Public Port
+      - '81:81' # Admin Web Port
+    environment:
+      DB_MYSQL_HOST: "npm_db"
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: "npm"
+      DB_MYSQL_PASSWORD: "npm_password"
+      DB_MYSQL_NAME: "npm"
+      # Si vous préférez SQLite pour NPM (plus léger), commentez les lignes DB_MYSQL_* et commentez le service npm_db en bas.
+    volumes:
+      - ./npm/data:/data
+      - ./npm/letsencrypt:/etc/letsencrypt
+    networks:
+      - alan-network
+
+  # Base de données pour Nginx Proxy Manager (Optionnel si SQLite)
+  npm_db:
+    image: 'jc21/mariadb-aria:latest'
+    container_name: alan-npm-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 'npm_root_password'
+      MYSQL_DATABASE: 'npm'
+      MYSQL_USER: 'npm'
+      MYSQL_PASSWORD: 'npm_password'
+    volumes:
+      - ./npm/mysql:/var/lib/mysql
+    networks:
+      - alan-network
+
+networks:
+  alan-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
