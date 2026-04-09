@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "slug": "vlille-tracker",
+    "title": "Application V'Lille Tracker",
+    "category": "MOBILE APP // DATA IOT",
+    "date": "2025-04-01",
+    "excerpt": "Développement d'une application React Native pour l'analyse des disponibilités de vélos en temps réel avec historisation via Supabase.",
+    "content": "Ce projet personnel vise à faciliter les déplacements urbains à Lille. En utilisant les API Open Data, l'application permet de suivre la disponibilité des stations V'Lille en temps réel.\n\n### Stack Technique\n- React Native\n- Supabase (Backend/Database)\n- n8n (Automatisation ETL)\n- n8n pour historiser les données et anticiper la disponibilité des vélos.\n\n### Impact\nUne vision prédictive de la disponibilité des vélos grâce à l'historisation des flux.",
+    "status": "LIVE_DEPLOYED",
+    "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200"
+  },
+  {
+    "id": 2,
+    "slug": "bassin-acoustique",
+    "title": "Bassin Acoustique Intelligent",
+    "category": "IOT // HOME ASSISTANT",
+    "date": "2024-04-15",
+    "excerpt": "Projet scolaire d'acquisition et traitement de données avec modélisation sur Home Assistant et déploiement via Docker/MQTT.",
+    "content": "Développement d'une infrastructure de données pour des applications critiques. Le projet impliquait le déploiement de capteurs IoT robustes et leur intégration dans un écosystème de supervision local.\n\n### Composants\n- Docker & MQTT (Communication)\n- Home Assistant (Interface/Logique)\n- Capteurs Acoustiques\n\n### Réalisation\nAcquisition et traitement de données en temps réel pour une modélisation précise de l'état du bassin.",
+    "status": "ACADEMIC_DONE",
+    "image": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&q=80&w=1200"
+  },
+  {
+    "id": 100,
+    "slug": "test-project",
+    "title": "Project Test // Validation",
+    "category": "DEBUG // SYSTEM_CHECK",
+    "date": "2026-04-08",
+    "excerpt": "Ceci est un article de test pour valider que le système de synchronisation entre JSON et Strapi fonctionne correctement.",
+    "content": "## ANALYSE_SYSTÈME\n\nCe projet a été généré pour valider la flexibilité de l'interface.\n\n### RÉALISATION_TECHNIQUE\n\n> \"L'innovation n'est pas seulement technique, elle est dans l'organisation de la donnée.\"\n\nVoici comment nous structurons les composants :\n- **Supervision temps réel**\n- **Traitement par lots**\n- **Visualisation haute densité**\n\n![Composants du système](https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200)\n\n### VALIDATION_LOG\n\nLe système de rendu Markdown permet désormais d'inclure des titres, des sous-titres, des citations et des images n'importe où dans le corps du texte.",
+    "status": "VALIDATION_RUNNING",
+    "image": "https://images.unsplash.com/photo-1618477388954-7852f32655ec?auto=format&fit=crop&q=80&w=1200"
+  }
+]

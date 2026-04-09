@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_content_medias",
+  "info": {
+    "displayName": "Media",
+    "description": "Une image ou une vidéo"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "caption": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+node_modules/
+.env
+.DS_Store
+frontend/node_modules/
+backend/node_modules/
+backend/.tmp/
+backend/dist/
+backend/.cache/
+frontend/.next/

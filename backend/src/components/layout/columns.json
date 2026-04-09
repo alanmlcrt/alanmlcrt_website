@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_layout_columns",
+  "info": {
+    "displayName": "Two Columns",
+    "description": "Une grille à deux colonnes avec du texte"
+  },
+  "options": {},
+  "attributes": {
+    "leftCol": {
+      "type": "richtext"
+    },
+    "rightCol": {
+      "type": "richtext"
+    }
+  }
+}
