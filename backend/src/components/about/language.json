@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_about_languages",
+  "info": {
+    "displayName": "Language",
+    "icon": "globe"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "fluencyText": {
+      "type": "string"
+    },
+    "level": {
+      "type": "string"
+    },
+    "percentage": {
+      "type": "integer"
+    }
+  }
+}

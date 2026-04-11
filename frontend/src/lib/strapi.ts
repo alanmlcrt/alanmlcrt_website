@@ -35,3 +35,9 @@ export async function fetchStrapi(endpoint: string, options: RequestInit = {}) {
         return [];
     }
 }
+
+export function getStrapiMedia(url: string | null | undefined) {
+    if (!url) return null;
+    if (url.startsWith('http') || url.startsWith('//')) return url;
+    return `${STRAPI_URL}${url}`;
+}

@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_about_experiences",
+  "info": {
+    "displayName": "Experience",
+    "icon": "briefcase"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "company": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "isCurrent": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

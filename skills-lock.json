@@ -1,6 +1,11 @@
 {
   "version": 1,
   "skills": {
+    "docker-expert": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "computedHash": "e5556c606d3a64877877728f7b945bc189b694ead92ee4b76b475d4633f14d37"
+    },
     "nodejs-backend-patterns": {
       "source": "wshobson/agents",
       "sourceType": "github",
@@ -10,6 +15,11 @@
       "source": "getsentry/skills",
       "sourceType": "github",
       "computedHash": "1eee1e41aa0a0e75dbbe0cac387e3d61bedf51af1888f184301a173731e6973e"
+    },
+    "ui-ux-pro-max-skill": {
+      "source": "aradotso/trending-skills",
+      "sourceType": "github",
+      "computedHash": "5468b05b7eebdb29865e456ac81f827e83fd507e1b9ec96882535475387d4a2a"
     },
     "web-coder": {
       "source": "github/awesome-copilot",

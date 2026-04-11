@@ -2,52 +2,58 @@
 
 @theme inline {
   --color-error-container: #93000a;
-  --color-on-secondary: #561f00;
+  --color-on-secondary: #351000;
   --color-on-background: #e5e2e1;
-  --color-primary: #ffb693;
-  --color-background: #131313;
-  --color-surface-container: #201f1f;
-  --color-secondary-fixed-dim: #ffb693;
-  --color-secondary-container: #7b3409;
+  --color-primary: #ff6b00;
+  --color-background: #050505;
+  --color-surface-container: #1a1a1a;
+  --color-secondary-fixed-dim: #ff6b00;
+  --color-secondary-container: #572000;
   --color-primary-container: #ff6b00;
-  --color-on-tertiary: #003257;
+  --color-on-tertiary: #ffffff;
   --color-on-secondary-fixed: #351000;
   --color-tertiary-fixed: #d0e4ff;
   --color-on-tertiary-fixed: #001d35;
-  --color-tertiary-container: #059eff;
-  --color-surface-variant: #353534;
+  --color-tertiary-container: #00497b;
+  --color-surface-variant: #252525;
   --color-on-surface: #e5e2e1;
-  --color-secondary-fixed: #ffdbcc;
-  --color-on-tertiary-container: #003357;
+  --color-secondary-fixed: #ff6b00;
+  --color-on-tertiary-container: #d0e4ff;
   --color-on-error-container: #ffdad6;
   --color-on-primary-fixed-variant: #7a3000;
-  --color-outline: #a98a7d;
-  --color-surface-tint: #ffb693;
-  --color-on-secondary-container: #ffa173;
+  --color-outline: #5a4136;
+  --color-surface-tint: #ff6b00;
+  --color-on-secondary-container: #ffdbcc;
   --color-inverse-surface: #e5e2e1;
   --color-primary-fixed: #ffdbcc;
   --color-tertiary-fixed-dim: #9ccaff;
-  --color-surface-container-highest: #353534;
+  --color-surface-container-highest: #303030;
   --color-on-primary-fixed: #351000;
-  --color-surface-dim: #131313;
+  --color-surface-dim: #050505;
   --color-on-error: #690005;
-  --color-surface-container-lowest: #0e0e0e;
-  --color-on-surface-variant: #e2bfb0;
+  --color-surface-container-lowest: #050505;
+  --color-on-surface-variant: #d3c4be;
   --color-on-secondary-fixed-variant: #783207;
   --color-on-tertiary-fixed-variant: #00497b;
   --color-inverse-on-surface: #313030;
-  --color-outline-variant: #5a4136;
-  --color-surface-container-high: #2a2a2a;
-  --color-inverse-primary: #a04100;
-  --color-tertiary: #9ccaff;
+  --color-outline-variant: #4a3a33;
+  --color-surface-container-high: #252525;
+  --color-inverse-primary: #ff6b00;
+  --color-tertiary: #38bdf8;
   --color-error: #ffb4ab;
-  --color-secondary: #ffb693;
-  --color-on-primary: #561f00;
-  --color-primary-fixed-dim: #ffb693;
-  --color-surface-container-low: #1c1b1b;
-  --color-surface-bright: #3a3939;
-  --color-surface: #131313;
-  --color-on-primary-container: #572000;
+  --color-secondary: #ff6b00;
+  --color-on-primary: #ffffff;
+  --color-primary-fixed-dim: #ff6b00;
+  --color-surface-container-low: #131313;
+  --color-surface-bright: #303030;
+  --color-surface: #050505;
+  --color-on-primary-container: #ffffff;
+
+  /* Force standard orange set to the exact same neon version */
+  --color-orange-400: #ff6b00;
+  --color-orange-500: #ff6b00;
+  --color-orange-600: #ff6b00;
+  --color-orange-700: #ff6b00;
 
   --font-headline: "Space Grotesk", sans-serif;
   --font-body: "Manrope", sans-serif;
@@ -70,7 +76,7 @@ body {
     clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 }
 .light-pipe {
-    background: linear-gradient(45deg, #ff6b00 0%, #ffb693 100%);
+    background: #ff6b00;
 }
 .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
@@ -79,11 +85,14 @@ body {
     text-shadow: 
         0 0 10px rgba(255, 107, 0, 0.8),
         0 0 20px rgba(255, 107, 0, 0.5),
-        0 0 40px rgba(255, 107, 0, 0.3),
-        0 0 60px rgba(255, 107, 0, 0.1);
+        0 0 40px rgba(255, 107, 0, 0.2);
 }
 .text-glow-primary {
     text-shadow: 
         0 0 10px rgba(229, 226, 225, 0.8),
         0 0 25px rgba(229, 226, 225, 0.4);
+}@keyframes scan {
+    0% { transform: translateY(0); opacity: 0; }
+    50% { opacity: 0.5; }
+    100% { transform: translateY(200px); opacity: 0; }
 }

@@ -21,8 +21,8 @@ export default function SideNav() {
   };
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 border-r border-orange-600/10 bg-[#0E0E0E] py-20 hidden xl:flex flex-col z-40">
-      <div className="px-8 mb-12 mt-6">
+    <aside className="fixed left-0 top-0 h-full w-64 border-r border-orange-600/10 bg-[#0E0E0E] pt-32 pb-20 hidden xl:flex flex-col z-40">
+      <div className="px-8 mb-12">
         <p className="text-orange-600 font-headline font-bold text-xs tracking-widest mb-1 uppercase">
           alanmlcrt // STUDIO
         </p>

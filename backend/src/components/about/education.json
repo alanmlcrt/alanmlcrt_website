@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_about_educations",
+  "info": {
+    "displayName": "Education",
+    "icon": "book"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "school": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

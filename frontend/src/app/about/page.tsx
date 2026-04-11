@@ -2,9 +2,13 @@
 
 import SectionReveal from "@/components/SectionReveal";
 import ParallaxBackground from "@/components/ParallaxBackground";
+import CircuitBackground from "@/components/CircuitBackground";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { Mail, ExternalLink, GraduationCap, Briefcase, Rocket, Star } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
+import { Mail, ExternalLink, GraduationCap, Briefcase, Rocket, Star, Sparkles } from "lucide-react";
+import { fetchStrapi } from "@/lib/strapi";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function About() {
   const containerRef = useRef(null);
@@ -16,8 +20,73 @@ export default function About() {
   const heroY = useTransform(scrollYProgress, [0, 0.2], [0, -50]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
+  const [aboutData, setAboutData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [ctaActive, setCtaActive] = useState(false);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const populate = 'populate[experiences]=*&populate[skills]=*&populate[educations]=*&populate[interests]=*&populate[languages]=*&populate[featuredProjects][populate]=*';
+        const data = await fetchStrapi(`about?${populate}`);
+        // Strapi single type returns data directly or as an array of 1 element (usually an object)
+        if (data && !Array.isArray(data)) setAboutData(data);
+      } catch (err) {
+        console.error("Failed to load about data", err);
+      }
+      setLoading(false);
+    }
+    loadData();
+  }, []);
+
+  // Defaults
+  const data = aboutData || {};
+  const heroTitle = data.heroTitle || "ALAN MOLCRETTE";
+  const heroSubtitle = data.heroSubtitle || "Industries Connectées // IoT // Data Supervision";
+  const email = data.email || "molcrette.alan@gmail.com";
+  const linkedinUrl = data.linkedinUrl || "https://www.linkedin.com/in/alan-molcrette/";
+  const profileQuote = data.profileQuote || '"Mon parcours est guidé par une volonté de comprendre les systèmes dans leur globalité. De l\'électronique pure au déploiement logiciel, je vois chaque projet comme un puzzle complexe à optimiser pour l\'utilisateur final."';
+  const profileSummary = data.profileSummary || "Ingénieur diplômé en électronique et informatique, spécialisé en IoT. Je souhaite mettre mes compétences au service de projets innovants au sein d'industries connectées pour optimiser les processus et valoriser la donnée.";
+  const profileApproach = data.profileApproach || "Rigueur, curiosité et autonomie me permettent de m'adapter rapidement à de nouveaux environnements technologiques complexes.";
+  const profileObjective = data.profileObjective || "Contribuer au déploiement de solutions robustes pour l'automatisation et la supervision de flux de données critiques.";
+  
+  const experiences = data.experiences && data.experiences.length > 0 ? data.experiences : [
+    { title: "MAINTENANCE & DÉV. POWER BI", company: "ENEDIS", date: "FÉVRIER 2026 — AUJOURD'HUI", description: "Modernisation des processus métier via l'évolution d'outils digitaux. Gain de temps et amélioration de l'expérience utilisateur.", isCurrent: true },
+    { title: "AMÉLIORATION SOLUTION DATAVIZ", company: "RTE", date: "SEPT. 2025 — DÉC. 2025", description: "Déploiement national de l'outil développé en stage. Extension des gains d'efficacité à l'échelle nationale.", isCurrent: false },
+    { title: "STAGE DATAVIZ & ETL", company: "RTE", date: "FÉVRIER 2025 — AOÛT 2025", description: "Développement d'outils avec Power BI et Python. Création d'ETL SQL/Python automatisant le traitement des données.", isCurrent: false },
+    { title: "RESEARCH STAGE (PIXHAWK/LORA)", company: "UQAR (CANADA)", date: "MAI 2024 — JUILLET 2024", description: "Contrôle de vol autonome Pixhawk et réseau mesh LoRa. Analyse de signaux série entre Pixhawk et ESP32.", isCurrent: false }
+  ];
+
+  const featuredProjects = data.featuredProjects || [];
+
+  const skills = data.skills && data.skills.length > 0 ? data.skills : [
+    { icon: "memory", label: "ESP32 / PI\nIOT PROTOCOLS" },
+    { icon: "analytics", label: "POWER BI\nSUPERVISION" },
+    { icon: "database", label: "SQL / MONGO\nSUPABASE" },
+    { icon: "terminal", label: "PYTHON\nAUTOMATISATION" },
+    { icon: "layers", label: "DOCKER\nCI/CD" },
+    { icon: "hub", label: "MQTT / LORA\nZIGBEE" }
+  ];
+
+  const educations = data.educations && data.educations.length > 0 ? data.educations : [
+    { title: "JUNIA ISEN, Lille", date: "2022 — 2025", description: "Diplôme d'Ingénieur en Électronique et Numérique." },
+    { title: "Lycée Robespierre, Arras", date: "2020 — 2022", description: "CPGE MPSI/PSI (Physique et Sciences de l'Ingénieur)." }
+  ];
+
+  const interests = data.interests && data.interests.length > 0 ? data.interests : [
+    { label: "ASTRONOMIE", icon: "flare" },
+    { label: "COURSE À PIED", icon: "directions_run" },
+    { label: "VÉLO", icon: "directions_bike" },
+    { label: "PHOTOGRAPHIE", icon: "photo_camera" }
+  ];
+
+  const languages = data.languages && data.languages.length > 0 ? data.languages : [
+    { name: "ANGLAIS", fluencyText: "NIVEAU TECHNIQUE", level: "B2", percentage: 75 },
+    { name: "ALLEMAND", fluencyText: "CONNAISSANCES", level: "A2", percentage: 40 }
+  ];
+
   return (
-    <div ref={containerRef} className="flex-1 relative">
+    <div ref={containerRef} className={`flex-1 relative transition-opacity duration-1000 ${loading ? 'opacity-0' : 'opacity-100'}`}>
       <ParallaxBackground />
 
       {/* Hero Section */}
@@ -29,18 +98,18 @@ export default function About() {
                 <p className="text-orange-600 font-headline text-sm tracking-[0.5em] uppercase">INGÉNIEUR_DIPLÔMÉ_JUNIA_ISEN</p>
             </div>
             <h1 className="font-headline text-white font-black text-6xl md:text-9xl tracking-tighter mb-4 leading-none text-glow">
-              ALAN <span className="text-orange-600">MOLCRETTE</span>
+              {heroTitle.split(' ')[0]} <span className="text-orange-600">{heroTitle.split(' ').slice(1).join(' ')}</span>
             </h1>
             <h2 className="font-headline text-2xl md:text-3xl text-gray-400 font-light tracking-[0.2em] mb-12 uppercase">
-                Industries Connectées // IoT // Data Supervision
+                {heroSubtitle}
             </h2>
             
             <div className="flex flex-wrap gap-8 items-center">
-                <a href="mailto:molcrette.alan@gmail.com" className="flex items-center gap-3 text-gray-400 hover:text-orange-400 transition-colors group">
+                <a href={`mailto:${email}`} className="flex items-center gap-3 text-gray-400 hover:text-orange-400 transition-colors group">
                     <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>mail</span>
-                    <span className="font-headline text-xs tracking-widest uppercase">molcrette.alan@gmail.com</span>
+                    <span className="font-headline text-xs tracking-widest uppercase">{email}</span>
                 </a>
-                <a href="https://www.linkedin.com/in/alan-molcrette/" target="_blank" className="flex items-center gap-3 text-gray-400 hover:text-orange-400 transition-colors group">
+                <a href={linkedinUrl} target="_blank" className="flex items-center gap-3 text-gray-400 hover:text-orange-400 transition-colors group">
                     <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>link</span>
                     <span className="font-headline text-xs tracking-widest uppercase">LinkedIn Profile</span>
                 </a>
@@ -59,14 +128,31 @@ export default function About() {
                 <div className="aspect-[4/5] bg-surface-container-low relative overflow-hidden border border-white/10 ring-1 ring-orange-600/20">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-600/5 via-transparent to-transparent"></div>
                   {/* Portrait Placeholder with user info */}
-                  <div className="w-full h-full flex flex-col items-center justify-center bg-zinc-900/50 p-12 text-center border-white/5">
-                    <div className="w-32 h-32 rounded-full light-pipe mb-8 p-1">
-                        <div className="w-full h-full rounded-full bg-zinc-950 flex items-center justify-center">
-                            <span className="font-headline text-4xl font-black text-orange-600">AM</span>
+                  <div className="w-full h-full relative border-white/5 group-hover:scale-105 transition-transform duration-1000">
+                    <Image 
+                      src="/photo alan.jpg" 
+                      alt="Alan Molcrette" 
+                      fill 
+                      priority
+                      className="object-cover grayscale hover:grayscale-0 transition-all duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80"></div>
+                    
+                    <div className="absolute top-8 left-8">
+                        <div className="w-16 h-16 rounded-full light-pipe p-0.5 opacity-90 backdrop-blur-md shadow-[0_0_20px_rgba(255,107,0,0.3)]">
+                            <div className="w-full h-full rounded-full bg-zinc-950/90 flex items-center justify-center">
+                                <span className="font-headline text-xl font-black text-orange-600">AM</span>
+                            </div>
                         </div>
                     </div>
-                    <p className="font-headline text-white text-lg font-bold tracking-widest mb-2 uppercase">ALAN MOLCRETTE</p>
-                    <p className="font-headline text-orange-600 text-[10px] tracking-[0.4em] uppercase">23 ANS // LILLE, FR</p>
+
+                    <div className="absolute bottom-24 left-8 transition-transform duration-500 group-hover:translate-x-2">
+                        <p className="font-headline text-white text-2xl font-black tracking-widest mb-1 uppercase text-glow">{heroTitle}</p>
+                        <div className="flex items-center gap-3">
+                            <span className="w-2 h-2 bg-orange-600 rounded-full animate-pulse"></span>
+                            <p className="font-headline text-orange-500 text-[10px] font-bold tracking-[0.4em] uppercase">23 ANS // LILLE_SYSTEM_ACTIVE</p>
+                        </div>
+                    </div>
                   </div>
                   <div className="absolute bottom-0 left-0 p-8 light-pipe w-full opacity-80">
                     <p className="font-headline font-bold text-on-primary tracking-[0.3em] text-[10px] uppercase flex items-center gap-2">
@@ -79,7 +165,7 @@ export default function About() {
                 <div className="mt-8 p-6 border-l-2 border-orange-600/30 bg-white/[0.02]">
                     <p className="text-orange-600 font-headline text-[10px] tracking-widest uppercase mb-3">SYSTEM_LOG // NOTE_PERSONNELLE</p>
                     <p className="text-gray-400 font-light italic text-sm leading-relaxed">
-                        &quot;Mon parcours est guidé par une volonté de comprendre les systèmes dans leur globalité. De l&apos;électronique pure au déploiement logiciel, je vois chaque projet comme un puzzle complexe à optimiser pour l&apos;utilisateur final.&quot;
+                        {profileQuote}
                     </p>
                 </div>
               </div>
@@ -92,15 +178,15 @@ export default function About() {
                 <h2 className="font-headline text-3xl font-bold tracking-tight text-white uppercase text-glow-primary">PROFIL // RÉSUMÉ_SYSTÈME</h2>
               </div>
               <div className="space-y-8 text-gray-400 text-xl leading-relaxed font-light">
-                <p>Ingénieur diplômé en <span className="text-orange-500 font-medium whitespace-nowrap">électronique et informatique</span>, spécialisé en IoT. Je souhaite mettre mes compétences au service de projets innovants au sein d&apos;industries connectées pour optimiser les processus et valoriser la donnée.</p>
+                <p>{profileSummary}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8 border-t border-white/5">
                     <div>
                         <h4 className="text-white font-headline text-xs tracking-widest font-bold mb-4 uppercase">Approche</h4>
-                        <p className="text-gray-500 text-base leading-relaxed">Rigueur, curiosité et autonomie me permettent de m&apos;adapter rapidement à de nouveaux environnements technologiques complexes.</p>
+                        <p className="text-gray-500 text-base leading-relaxed">{profileApproach}</p>
                     </div>
                     <div>
                         <h4 className="text-white font-headline text-xs tracking-widest font-bold mb-4 uppercase">Objectif</h4>
-                        <p className="text-gray-500 text-base leading-relaxed">Contribuer au déploiement de solutions robustes pour l&apos;automatisation et la supervision de flux de données critiques.</p>
+                        <p className="text-gray-500 text-base leading-relaxed">{profileObjective}</p>
                     </div>
                 </div>
               </div>
@@ -123,38 +209,46 @@ export default function About() {
           </SectionReveal>
 
           <div className="relative space-y-32 before:absolute before:left-0 md:before:left-1/2 before:top-0 before:h-full before:w-[1px] before:bg-orange-600/10">
-            {[
-              { title: "MAINTENANCE & DÉV. POWER BI", company: "ENEDIS", date: "FÉVRIER 2026 — AUJOURD'HUI", desc: "Modernisation des processus métier via l'évolution d'outils digitaux. Gain de temps et amélioration de l'expérience utilisateur.", side: "right", current: true },
-              { title: "AMÉLIORATION SOLUTION DATAVIZ", company: "RTE", date: "SEPT. 2025 — DÉC. 2025", desc: "Déploiement national de l'outil développé en stage. Extension des gains d'efficacité à l'échelle nationale.", side: "left", current: false },
-              { title: "STAGE DATAVIZ & ETL", company: "RTE", date: "FÉVRIER 2025 — AOÛT 2025", desc: "Développement d'outils avec Power BI et Python. Création d'ETL SQL/Python automatisant le traitement des données.", side: "right", current: false },
-              { title: "RESEARCH STAGE (PIXHAWK/LORA)", company: "UQAR (CANADA)", date: "MAI 2024 — JUILLET 2024", desc: "Contrôle de vol autonome Pixhawk et réseau mesh LoRa. Analyse de signaux série entre Pixhawk et ESP32.", side: "left", current: false }
-            ].map((item, i) => (
-              <SectionReveal key={i} direction={item.side === "right" ? "left" : "right"}>
+            {experiences.map((item: any, i: number) => {
+              const side = i % 2 === 0 ? "right" : "left";
+              return (
+              <SectionReveal key={i} direction={side === "right" ? "left" : "right"}>
                 <div className={`relative flex flex-col md:flex-row items-center md:justify-between group`}>
-                  {item.side === "right" ? (
+                  {side === "right" ? (
                     <>
                       <div className="md:w-[45%] md:text-right">
                         <h3 className="text-orange-600 font-headline font-bold text-2xl mb-1 uppercase text-glow">{item.title}</h3>
-                        <p className="text-white font-headline text-sm mb-4 tracking-widest opacity-80">{item.company} // {item.date}</p>
-                        <p className="text-gray-400 font-light text-lg italic leading-relaxed">{item.desc}</p>
+                        <div className="flex items-center gap-2 md:justify-end mb-4 opacity-80">
+                           <p className="text-white font-headline text-sm tracking-widest">{item.company} // {item.date}</p>
+                           <span className="w-1.5 h-1.5 rounded-none rotate-45 bg-orange-600 animate-pulse"></span>
+                        </div>
+                        <p className="text-gray-400 font-light text-lg italic leading-relaxed">{item.description}</p>
                       </div>
-                      <div className={`absolute left-[-5px] md:left-1/2 md:-ml-2 w-4 h-4 hex-clip z-10 transition-all duration-500 ${item.current ? 'light-pipe shadow-[0_0_25px_rgba(255,107,0,0.8)] scale-125' : 'bg-surface-container-high border border-orange-600/30'} group-hover:scale-150`}></div>
+                      <div className="absolute left-[-5px] md:left-1/2 md:-ml-2 w-4 h-4 z-10 flex items-center justify-center">
+                        <div className={`w-3 h-3 rotate-45 border border-orange-600/50 bg-black transition-all duration-500 ${item.isCurrent ? 'shadow-[0_0_15px_rgba(255,107,0,0.8)] border-orange-500 bg-orange-600' : 'group-hover:border-orange-500 group-hover:bg-orange-600/20'}`}></div>
+                        {item.isCurrent && <div className="absolute inset-0 rotate-45 border border-orange-600/20 animate-ping"></div>}
+                      </div>
                       <div className="hidden md:block md:w-[45%]"></div>
                     </>
                   ) : (
                     <>
                       <div className="hidden md:block md:w-[45%]"></div>
-                      <div className="absolute left-[-5px] md:left-1/2 md:-ml-2 w-4 h-4 bg-surface-container-high border border-orange-600/30 hex-clip group-hover:light-pipe transition-all duration-500 z-10 group-hover:scale-150"></div>
+                      <div className="absolute left-[-5px] md:left-1/2 md:-ml-2 w-4 h-4 z-10 flex items-center justify-center">
+                        <div className={`w-3 h-3 rotate-45 border border-orange-600/50 bg-black transition-all duration-500 group-hover:border-orange-500 group-hover:bg-orange-600/20`}></div>
+                      </div>
                       <div className="md:w-[45%] text-left">
                         <h3 className="text-white font-headline font-bold text-2xl mb-1 uppercase text-glow-primary">{item.title}</h3>
-                        <p className="text-orange-600 font-headline text-sm mb-4 tracking-widest opacity-80">{item.company} // {item.date}</p>
-                        <p className="text-gray-400 font-light text-lg italic leading-relaxed">{item.desc}</p>
+                        <div className="flex items-center gap-2 mb-4 opacity-80">
+                           <span className="w-1.5 h-1.5 rounded-none rotate-45 bg-orange-600 animate-pulse"></span>
+                           <p className="text-orange-600 font-headline text-sm tracking-widest">{item.company} // {item.date}</p>
+                        </div>
+                        <p className="text-gray-400 font-light text-lg italic leading-relaxed">{item.description}</p>
                       </div>
                     </>
                   )}
                 </div>
               </SectionReveal>
-            ))}
+            )})}
           </div>
         </div>
       </section>
@@ -172,16 +266,12 @@ export default function About() {
         </SectionReveal>
 
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          {[
-            { icon: "memory", label: "ESP32 / PI\nIOT PROTOCOLS" },
-            { icon: "analytics", label: "POWER BI\nSUPERVISION" },
-            { icon: "database", label: "SQL / MONGO\nSUPABASE" },
-            { icon: "terminal", label: "PYTHON\nAUTOMATISATION" },
-            { icon: "container", label: "DOCKER\nCI/CD" },
-            { icon: "hub", label: "MQTT / LORA\nZIGBEE" }
-          ].map((skill, i) => (
+          {skills.map((skill: any, i: number) => (
             <SectionReveal key={i} delay={i * 0.1}>
-              <div className="bg-surface-container-low border border-white/5 p-8 flex flex-col items-center justify-center text-center group hover:border-orange-600/40 hover:bg-orange-600/[0.02] transition-all duration-500 aspect-square border-b-2 hover:border-b-orange-600">
+              <div className="bg-surface-container-low border border-white/5 p-8 flex flex-col items-center justify-center text-center group hover:border-orange-600/40 hover:bg-orange-600/[0.02] transition-all duration-500 aspect-square border-b-2 hover:border-b-orange-600 relative overflow-hidden">
+                {/* Scanline Effect on Hover */}
+                <div className="absolute top-0 left-0 w-full h-[1px] bg-orange-600/50 opacity-0 group-hover:block group-hover:animate-[scan_1.5s_linear_infinite] pointer-events-none"></div>
+                
                 <span className="material-symbols-outlined text-4xl text-orange-600 mb-6 group-hover:scale-110 transition-transform text-glow">{skill.icon}</span>
                 <h4 className="font-headline text-[10px] font-bold text-white tracking-widest uppercase whitespace-pre-line leading-loose">{skill.label}</h4>
               </div>
@@ -191,46 +281,54 @@ export default function About() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="max-w-7xl mx-auto px-8 mb-64 scroll-mt-24">
-        <SectionReveal>
-            <div className="flex items-center gap-4 mb-20">
-                <Rocket className="text-orange-600" size={24} />
-                <h2 className="font-headline text-5xl font-black tracking-widest text-white uppercase text-glow-primary">PROJETS_PHARES</h2>
-            </div>
-        </SectionReveal>
+      {featuredProjects.length > 0 && (
+        <section id="projects" className="max-w-7xl mx-auto px-8 mb-64 scroll-mt-24">
+          <SectionReveal>
+              <div className="flex items-center gap-4 mb-20">
+                  <Rocket className="text-orange-600" size={24} />
+                  <h2 className="font-headline text-5xl font-black tracking-widest text-white uppercase text-glow-primary">PROJETS_PHARES</h2>
+              </div>
+          </SectionReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <SectionReveal direction="right">
-                <div className="bg-surface-container-high/30 border border-white/5 p-12 relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-orange-600/10 blur-[80px] pointer-events-none group-hover:bg-orange-600/20 transition-all"></div>
-                    <div className="relative z-10">
-                        <p className="text-orange-600 font-headline text-[10px] tracking-widest uppercase border-l-2 border-orange-600 pl-4 mb-8">PERSONNEL // REACT NATIVE</p>
-                        <h3 className="text-white font-headline text-3xl font-bold mb-6 tracking-tighter uppercase">Application V&apos;Lille Tracker</h3>
-                        <p className="text-gray-400 font-light text-lg leading-relaxed mb-10">Analyse des disponibilités en temps réel via Supabase et n8n. Historisation des données pour anticiper les flux urbains.</p>
-                        <div className="flex gap-6">
-                             <a href="https://meteo-vlille.vercel.app/" target="_blank" className="text-orange-500 font-headline text-xs font-black tracking-widest flex items-center gap-2 hover:translate-x-2 transition-transform">
-                                VIEW_LIVE <ExternalLink size={14} />
-                             </a>
-                        </div>
-                    </div>
-                </div>
-            </SectionReveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              {featuredProjects.slice(0, 2).map((proj: any, i: number) => (
+                  <SectionReveal key={proj.slug} direction={i % 2 === 0 ? "right" : "left"} delay={i * 0.2}>
+                      <motion.div 
+                          whileHover={{ 
+                              y: -6, 
+                              scale: 1.005,
+                              boxShadow: "0 15px 30px -10px rgba(255, 107, 0, 0.25)"
+                          }}
+                          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                          className="bg-surface-container-high/30 border border-white/5 p-12 relative overflow-hidden group h-full cursor-pointer"
+                      >
+                          {/* Perspective Under-glow */}
+                          <motion.div 
+                              variants={{ hover: { opacity: 0.3, scale: 1.4 } }}
+                              initial={{ opacity: 0 }}
+                              className="absolute inset-0 bg-orange-600/15 blur-[100px] pointer-events-none transition-opacity duration-500"
+                          />
 
-            <SectionReveal direction="left" delay={0.2}>
-                <div className="bg-surface-container-high/30 border border-white/5 p-12 relative overflow-hidden group h-full">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/5 blur-[80px] pointer-events-none group-hover:bg-blue-600/10 transition-all"></div>
-                    <div className="relative z-10">
-                        <p className="text-blue-500 font-headline text-[10px] tracking-widest uppercase border-l-2 border-blue-600 pl-4 mb-8">SCOLAIRE // IOT INFRA</p>
-                        <h3 className="text-white font-headline text-3xl font-bold mb-6 tracking-tighter uppercase">Bassin Acoustique Intelligent</h3>
-                        <p className="text-gray-400 font-light text-lg leading-relaxed mb-10">Modélisation Home Assistant, déploiement capteurs IoT via Docker/MQTT pour applications critiques de données.</p>
-                        <div className="flex gap-6">
-                            <span className="text-gray-600 font-headline text-xs tracking-widest py-2 border-y border-white/5">EXÉCUTION_MAI_2024</span>
-                        </div>
-                    </div>
-                </div>
-            </SectionReveal>
-        </div>
-      </section>
+                          <div className="relative z-10">
+                              <p className="text-orange-600 font-headline text-[10px] tracking-widest uppercase border-l-2 border-orange-600 pl-4 mb-8">
+                                  {proj.category || 'PROJET_PHARE'}
+                              </p>
+                              <h3 className="text-white font-headline text-3xl font-bold mb-6 tracking-tighter uppercase">{proj.title}</h3>
+                              <p className="text-gray-400 font-light text-lg leading-relaxed mb-10">
+                                  {proj.description || (proj.content ? proj.content.split('\n')[0].replace(/#+\s*/, '').slice(0, 150) + '...' : 'Pas de description disponible.')}
+                              </p>
+                              <div className="flex gap-6">
+                                  <Link href={`/projects/${proj.slug}`} className="text-orange-500 font-headline text-xs font-black tracking-widest flex items-center gap-2 hover:translate-x-2 transition-transform">
+                                      READ_MORE <ExternalLink size={14} />
+                                  </Link>
+                              </div>
+                          </div>
+                      </motion.div>
+                  </SectionReveal>
+              ))}
+          </div>
+        </section>
+      )}
 
       {/* Education & Info Section */}
       <section id="education" className="max-w-7xl mx-auto px-8 mb-64 scroll-mt-24">
@@ -242,18 +340,14 @@ export default function About() {
                         <h3 className="text-white font-headline text-3xl font-black uppercase tracking-widest text-glow-primary">FORMATION</h3>
                     </div>
                     <div className="space-y-12 pl-4 border-l border-white/5">
-                        <div className="relative">
-                            <span className="absolute -left-[21px] top-2 w-2.5 h-2.5 rounded-full bg-orange-600"></span>
-                            <h4 className="text-white font-headline text-xl font-bold mb-1 uppercase">JUNIA ISEN, Lille</h4>
-                            <p className="text-orange-600 font-headline text-xs tracking-widest mb-4">2022 — 2025</p>
-                            <p className="text-gray-400 leading-relaxed text-lg font-light">Diplôme d&apos;Ingénieur en Électronique et Numérique.</p>
-                        </div>
-                        <div className="relative">
-                            <span className="absolute -left-[21px] top-2 w-2.5 h-2.5 rounded-full bg-zinc-800"></span>
-                            <h4 className="text-white font-headline text-xl font-bold mb-1 uppercase">Lycée Robespierre, Arras</h4>
-                            <p className="text-gray-500 font-headline text-xs tracking-widest mb-4">2020 — 2022</p>
-                            <p className="text-gray-400 leading-relaxed text-lg font-light">CPGE MPSI/PSI (Physique et Sciences de l&apos;Ingénieur).</p>
-                        </div>
+                        {educations.map((edu: any, i: number) => (
+                          <div key={i} className="relative">
+                              <span className={`absolute -left-[21px] top-2 w-2.5 h-2.5 rounded-full ${i === 0 ? 'bg-orange-600' : 'bg-zinc-800'}`}></span>
+                              <h4 className="text-white font-headline text-xl font-bold mb-1 uppercase">{edu.school || edu.title}</h4>
+                              <p className={`${i === 0 ? 'text-orange-600' : 'text-gray-500'} font-headline text-xs tracking-widest mb-4`}>{edu.date}</p>
+                              <p className="text-gray-400 leading-relaxed text-lg font-light">{edu.description}</p>
+                          </div>
+                        ))}
                     </div>
                 </div>
             </SectionReveal>
@@ -261,24 +355,36 @@ export default function About() {
             <SectionReveal direction="left" delay={0.2}>
                 <div className="space-y-12">
                     <div className="flex items-center gap-4">
-                        <div className="w-8 h-8 light-pipe p-1 rounded-sm rotate-45 flex items-center justify-center">
-                            <div className="w-full h-full bg-black -rotate-45 flex items-center justify-center">
-                                <span className="text-orange-600 font-headline text-[10px]">INT</span>
-                            </div>
-                        </div>
+                        <Sparkles className="text-orange-600" size={28} />
                         <h3 className="text-white font-headline text-3xl font-black uppercase tracking-widest text-glow-primary">INTÉRÊTS</h3>
                     </div>
                     <div className="grid grid-cols-2 gap-px bg-white/5 border border-white/5">
-                        {[
-                            { label: "ASTRONOMIE", icon: "flare" },
-                            { label: "COURSE À PIED", icon: "directions_run" },
-                            { label: "VÉLO", icon: "directions_bike" },
-                            { label: "PHOTOGRAPHIE", icon: "photo_camera" }
-                        ].map((item) => (
-                            <div key={item.label} className="bg-zinc-950/30 p-8 text-center group hover:bg-orange-600/10 transition-all flex flex-col items-center gap-4">
-                                <span className="material-symbols-outlined text-orange-600/40 group-hover:text-orange-600 transition-colors text-2xl group-hover:scale-110 duration-300">{item.icon}</span>
-                                <span className="text-gray-400 font-headline text-[10px] tracking-[0.4em] uppercase group-hover:text-orange-500 transition-colors">{item.label}</span>
-                            </div>
+                        {interests.map((item: any, i: number) => (
+                            <motion.div 
+                              key={i} 
+                              whileHover="hover"
+                              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                              className="bg-zinc-950/30 p-8 text-center group flex flex-col items-center gap-4 cursor-default relative overflow-hidden"
+                            >
+                                <motion.div
+                                  variants={{
+                                      hover: { scale: 1.05, backgroundColor: "rgba(234, 88, 12, 0.1)" }
+                                  }}
+                                  className="absolute inset-0 z-0"
+                                />
+                                <motion.span 
+                                  variants={{
+                                    hover: { scale: 1.2, color: "#ea580c" }
+                                  }}
+                                  transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                                  className="material-symbols-outlined text-orange-600/40 text-2xl relative z-10"
+                                >
+                                  {item.icon}
+                                </motion.span>
+                                <span className="text-gray-400 font-headline text-[10px] tracking-[0.4em] uppercase group-hover:text-orange-500 transition-colors">
+                                  {item.label}
+                                </span>
+                            </motion.div>
                         ))}
                     </div>
                     
@@ -286,27 +392,20 @@ export default function About() {
                         <p className="text-orange-600 font-headline text-xs font-bold tracking-[0.4em] uppercase mb-6 flex items-center gap-2">
                              <span className="material-symbols-outlined text-sm">language</span> LANGUES / GLOBAL_VIEW
                         </p>
-                        <div className="grid grid-cols-2 gap-8">
-                             <div className="p-4 border border-white/5 bg-white/[0.02] group hover:border-orange-600/40 transition-colors">
-                                <p className="text-white font-headline text-xs font-bold tracking-widest mb-1 uppercase">ANGLAIS</p>
-                                <p className="text-gray-500 font-headline text-[10px] tracking-widest uppercase mb-3">NIVEAU TECHNIQUE</p>
-                                <div className="flex items-center gap-4">
-                                    <span className="text-orange-600 font-headline text-xl font-black">B2</span>
-                                    <div className="h-[2px] flex-1 bg-white/10 relative overflow-hidden">
-                                        <div className="absolute inset-0 bg-orange-600 w-[75%] shadow-[0_0_10px_rgba(255,107,0,0.5)]"></div>
-                                    </div>
-                                </div>
-                             </div>
-                             <div className="p-4 border border-white/5 bg-white/[0.02] group hover:border-orange-600/40 transition-colors">
-                                <p className="text-white font-headline text-xs font-bold tracking-widest mb-1 uppercase">ALLEMAND</p>
-                                <p className="text-gray-500 font-headline text-[10px] tracking-widest uppercase mb-3">CONNAISSANCES</p>
-                                <div className="flex items-center gap-4">
-                                    <span className="text-gray-400 font-headline text-xl font-black">A2</span>
-                                    <div className="h-[2px] flex-1 bg-white/10 relative overflow-hidden">
-                                        <div className="absolute inset-0 bg-gray-500 w-[40%]"></div>
-                                    </div>
-                                </div>
-                             </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                            {languages.map((lang: any, i: number) => (
+                             <div key={i} className="p-4 border border-white/5 bg-white/[0.02] group hover:border-orange-600/40 transition-colors relative overflow-hidden">
+                                <div className="absolute top-0 right-0 py-1 px-2 bg-orange-600/10 text-[6px] text-orange-500 font-headline tracking-tighter opacity-40 group-hover:opacity-100 transition-opacity">AUTHORIZED</div>
+                                 <p className="text-white font-headline text-xs font-bold tracking-widest mb-1 uppercase">{lang.name}</p>
+                                 <p className="text-gray-500 font-headline text-[10px] tracking-widest uppercase mb-3">{lang.fluencyText}</p>
+                                 <div className="flex items-center gap-4">
+                                     <span className={`${i === 0 ? 'text-orange-600 text-glow' : 'text-gray-400'} font-headline text-xl font-black`}>{lang.level}</span>
+                                     <div className="h-[2px] flex-1 bg-white/10 relative overflow-hidden">
+                                         <div className={`absolute inset-0 ${i === 0 ? 'bg-orange-600 shadow-[0_0_10px_rgba(255,107,0,0.8)]' : 'bg-gray-500'}`} style={{ width: `${lang.percentage || 50}%` }}></div>
+                                     </div>
+                                 </div>
+                              </div>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -317,17 +416,40 @@ export default function About() {
       {/* CTA Section */}
       <section className="max-w-7xl mx-auto px-8 mb-40">
         <SectionReveal>
-          <div className="bg-surface-container-high p-16 md:p-32 relative overflow-hidden group border border-white/5">
-            <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-orange-600/10 via-transparent to-transparent opacity-50"></div>
+          <div className="bg-[#050505] p-16 md:p-32 relative overflow-hidden border border-white/5">
+            {/* Animated Circuit Canvas — radiates from button center */}
+            <CircuitBackground active={ctaActive} originX={0.5} originY={0.72} />
+
+            {/* Subtle dark vignette to keep text readable */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505] z-[1] pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/60 via-transparent to-[#050505]/60 z-[1] pointer-events-none"></div>
+
             <div className="relative z-10 text-center max-w-4xl mx-auto">
-              <h2 className="font-headline text-4xl md:text-6xl font-black text-white mb-12 tracking-tighter uppercase text-glow-primary">DISPONIBLE POUR COMMENCER LA PROCHAINE PHASE</h2>
+              <div className="flex justify-center mb-8">
+                <div className={`px-4 py-1 border font-headline text-[10px] tracking-[0.5em] uppercase transition-all duration-700 ${
+                  ctaActive
+                    ? 'border-orange-600/70 bg-orange-600/15 text-orange-500 shadow-[0_0_20px_rgba(255,107,0,0.4)]'
+                    : 'border-orange-600/30 bg-orange-600/5 text-orange-600'
+                }`}>READY_FOR_ENGAGEMENT // PHASE_04</div>
+              </div>
+              <h2 className={`font-headline text-4xl md:text-6xl font-black text-white mb-12 tracking-tighter uppercase transition-all duration-700 ${
+                ctaActive ? 'text-glow' : 'text-glow-primary'
+              }`}>DISPONIBLE POUR COMMENCER LA PROCHAINE PHASE</h2>
               <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
-                <a href="mailto:molcrette.alan@gmail.com" className="light-pipe text-on-primary px-16 py-5 font-headline font-bold uppercase tracking-[0.2em] text-sm hover:scale-105 active:scale-95 glow-primary transition-all duration-300 w-full md:w-auto text-center shadow-[0_0_30px_rgba(255,107,0,0.4)]">ÉTABLIR LA CONNEXION</a>
-                <a href="https://www.linkedin.com/in/alan-molcrette/" target="_blank" className="border border-orange-600/30 text-orange-600 px-16 py-5 font-headline font-bold uppercase tracking-[0.2em] text-sm hover:bg-orange-600/10 transition-all duration-300 w-full md:w-auto text-center flex items-center justify-center gap-2">
+                <a
+                  href={`mailto:${email}`}
+                  onMouseEnter={() => setCtaActive(true)}
+                  onMouseLeave={() => setCtaActive(false)}
+                  className={`light-pipe text-on-primary px-16 py-5 font-headline font-bold uppercase tracking-[0.2em] text-sm hover:scale-105 active:scale-95 transition-all duration-300 w-full md:w-auto text-center border border-white/20 cursor-pointer ${
+                    ctaActive ? 'shadow-[0_0_60px_rgba(255,107,0,0.8)]' : 'shadow-[0_0_20px_rgba(255,107,0,0.2)]'
+                  }`}
+                >
+                  ÉTABLIR LA CONNEXION
+                </a>
+                <a href={linkedinUrl} target="_blank" className="bg-black/40 backdrop-blur-md border border-orange-600/30 text-orange-600 px-16 py-5 font-headline font-bold uppercase tracking-[0.2em] text-sm hover:bg-orange-600/10 transition-all duration-300 w-full md:w-auto text-center flex items-center justify-center gap-2">
                     <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>link</span>
                     LIEN LINKEDIN
                 </a>
-                <button className="text-gray-500 hover:text-white px-8 py-5 font-headline font-bold uppercase tracking-[0.2em] text-xs transition-all duration-300 w-full md:w-auto">TÉLÉCHARGER LE CV</button>
               </div>
             </div>
           </div>

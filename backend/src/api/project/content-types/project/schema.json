@@ -22,30 +22,26 @@
       "required": true
     },
     "category": {
-      "type": "string"
+      "type": "enumeration",
+      "enum": [
+        "Article",
+        "Projet",
+        "Tutoriel"
+      ]
     },
     "date": {
       "type": "date"
     },
-    "excerpt": {
-      "type": "text"
-    },
     "content": {
       "type": "richtext"
-    },
-    "status": {
-      "type": "string"
     },
     "image": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
-    },
-    "specs": {
-      "type": "component",
-      "repeatable": true,
-      "component": "project.spec"
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

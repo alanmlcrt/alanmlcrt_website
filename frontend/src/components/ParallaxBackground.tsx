@@ -13,19 +13,8 @@ export default function ParallaxBackground() {
 
   return (
     <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
-      {/* Dynamic Glow 1 */}
-      <motion.div 
-        style={{ y: y1 }}
-        className="absolute top-[10%] -right-[10%] w-[500px] h-[500px] bg-orange-600/10 blur-[120px] rounded-full"
-      />
-      
-      {/* Dynamic Glow 2 */}
-      <motion.div 
-        style={{ y: y2, rotate: rotate }}
-        className="absolute bottom-[20%] -left-[10%] w-[600px] h-[600px] bg-primary-container/5 blur-[150px] rounded-full"
-      />
-
       {/* Grid Pattern with Parallax */}
+
       <motion.div 
         style={{ y: useTransform(scrollYProgress, [0, 1], [0, -100]) }}
         className="absolute inset-0 opacity-[0.03]"

@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_about_skills",
+  "info": {
+    "displayName": "Skill",
+    "icon": "code"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "string",
+      "description": "Google material symbol name"
+    }
+  }
+}

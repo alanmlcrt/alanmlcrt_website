@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { fetchStrapi } from "@/lib/strapi";
+import { fetchStrapi, getStrapiMedia } from "@/lib/strapi";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -21,36 +21,36 @@ const markdownComponents = {
       <span>{props.children}</span>
     </li>
   ),
-  img: ({node, ...props}: any) => (
-    <span className="block my-12 group relative aspect-video">
-        <Image 
-            src={props.src || ""}
-            alt={props.alt || "Project image"}
-            fill
-            className="object-cover border border-white/5 grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-[1.02]" 
-        />
-        <span className="absolute -bottom-4 left-0 text-[10px] text-gray-600 font-headline tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">IMG_REF // {props.alt}</span>
-    </span>
-  ),
+  img: ({node, ...props}: any) => {
+    const src = getStrapiMedia(props.src);
+    
+    if (!src) return null;
+
+    return (
+      <span className="block my-12 group relative aspect-video w-full">
+          <Image 
+              src={src}
+              alt={props.alt || "Project image"}
+              fill
+              className="object-cover border border-white/5 grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-[1.02]" 
+          />
+          <span className="absolute -bottom-4 left-0 text-[10px] text-gray-600 font-headline tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">IMG_REF // {props.alt}</span>
+      </span>
+    );
+  },
 };
 
 export default async function ProjectSingle({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   
-  const populate = [
-    'populate[image][populate]=*',
-    'populate[specs][populate]=*',
-  ].join('&');
+  const populate = 'populate=image';
 
   const projects = await fetchStrapi(`projects?filters[slug][$eq]=${encodeURIComponent(slug)}&${populate}`);
   const project = projects[0];
 
   if (!project) return notFound();
 
-  // Handle Strapi image format or fallback to local/external string
-  const imageUrl = project.image?.url 
-    ? `${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}${project.image.url}`
-    : project.image || 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200';
+  const imageUrl = getStrapiMedia(project.image?.url);
 
   return (
     <article className="max-w-5xl mx-auto px-8 py-20 w-full relative">
@@ -58,51 +58,62 @@ export default async function ProjectSingle({ params }: { params: Promise<{ slug
         <span className="material-symbols-outlined text-sm">arrow_back</span> Return to Archive
       </Link>
       
-      <header className="mb-16 relative">
+      <header className="mb-24 relative">
         <div className="absolute -top-20 -right-20 w-80 h-80 bg-orange-600/5 blur-[120px] rounded-full pointer-events-none"></div>
         
-        <div className="flex items-center gap-4 mb-4">
-            <span className="w-8 h-[1px] bg-orange-600"></span>
-            <p className="text-orange-600 font-headline text-xs tracking-[0.4em] uppercase">
-                {project.category}
-            </p>
-        </div>
-        
-        <h1 className="font-headline text-white font-black text-5xl md:text-7xl tracking-tighter mb-8 uppercase leading-tight">
-          {project.title}
-        </h1>
-        
-        <div className="flex flex-wrap gap-12 items-center border-y border-white/5 py-8">
-          <div>
-            <p className="text-gray-600 font-headline text-[10px] tracking-widest uppercase mb-1">DATE_STAMP</p>
-            <span className="text-gray-400 font-headline text-sm tracking-widest">{project.date}</span>
+        <div className="flex flex-col md:flex-row gap-12 items-start justify-between">
+          <div className="flex-1">
+            <div className="flex items-center gap-4 mb-4">
+                <span className="w-8 h-[1px] bg-orange-600"></span>
+                <p className="text-orange-600 font-headline text-xs tracking-[0.4em] uppercase">
+                    {project.category}
+                </p>
+            </div>
+            
+            <h1 className="font-headline text-white font-black text-5xl md:text-7xl tracking-tighter mb-8 uppercase leading-tight">
+              {project.title}
+            </h1>
+            
+            <div className="flex flex-wrap gap-12 items-center border-t border-white/5 pt-8">
+              <div>
+                <p className="text-gray-600 font-headline text-[10px] tracking-widest uppercase mb-1">DATE_STAMP</p>
+                <span className="text-gray-400 font-headline text-sm tracking-widest">{project.date}</span>
+              </div>
+              <div>
+                <p className="text-gray-600 font-headline text-[10px] tracking-widest uppercase mb-1">TYPE</p>
+                <span className="text-orange-500 font-headline text-sm tracking-widest flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+                    {project.category}
+                </span>
+              </div>
+            </div>
           </div>
-          <div>
-            <p className="text-gray-600 font-headline text-[10px] tracking-widest uppercase mb-1">STATUS</p>
-            <span className="text-orange-500 font-headline text-sm tracking-widest flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
-                {project.status}
-            </span>
-          </div>
-          <div className="ml-auto">
-             <button className="light-pipe text-on-primary px-6 py-2 font-headline font-bold uppercase text-[10px] tracking-widest transition-all hover:scale-105 active:scale-95">
-                EXECUTE_PROJECT
-             </button>
-          </div>
-        </div>
-      </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-        <div className="lg:col-span-8 space-y-12">
-            <div className="aspect-video bg-surface-container-low border border-white/5 overflow-hidden group relative">
+          {imageUrl && (
+            <div className="w-full md:w-64 lg:w-80 shrink-0 aspect-square bg-surface-container-low border border-white/5 overflow-hidden group relative">
                 <Image 
                     src={imageUrl} 
                     alt={project.title}
                     fill
                     priority
-                    className="object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 scale-105 group-hover:scale-100"
+                    className="object-cover transition-all duration-1000 scale-105 group-hover:scale-100"
                 />
+                {/* Telemetry Overlay */}
+                <div className="absolute top-4 left-4 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="bg-black/80 backdrop-blur-md px-2 py-1 border-l border-orange-500 text-[8px] text-orange-500 font-headline tracking-widest uppercase">COORD_X: 45.42</div>
+                    <div className="bg-black/80 backdrop-blur-md px-2 py-1 border-l border-orange-500 text-[8px] text-orange-500 font-headline tracking-widest uppercase">SYNC_RATE: 99.4%</div>
+                </div>
+                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="bg-orange-600/20 backdrop-blur-md px-2 py-1 border border-orange-500/50 text-[8px] text-orange-500 font-headline tracking-widest uppercase">SOURCE: STRAPI_CMS</div>
+                </div>
             </div>
+          )}
+        </div>
+      </header>
+
+      <div className="space-y-12">
+        <div className="max-w-4xl mx-auto space-y-12">
+
 
             <div className="space-y-24">
                 {project.content && (
@@ -117,39 +128,6 @@ export default async function ProjectSingle({ params }: { params: Promise<{ slug
                 )}
             </div>
         </div>
-
-        <aside className="lg:col-span-4 space-y-12">
-            <div className="bg-surface-container-lowest border border-white/5 p-8">
-                <h3 className="text-white font-headline font-bold text-sm tracking-widest uppercase mb-6 flex items-center gap-2">
-                    <span className="w-1 h-4 bg-orange-600"></span>
-                    Project Specs
-                </h3>
-                <ul className="space-y-4">
-                    {project.specs && project.specs.length > 0 ? (
-                        project.specs.map((spec: any, idx: number) => (
-                            <li key={idx} className="flex justify-between items-center text-xs border-b border-white/5 pb-2">
-                                <span className="text-gray-500 font-headline tracking-widest">{spec.name}</span>
-                                <span className="text-orange-600 material-symbols-outlined text-sm">check_circle</span>
-                            </li>
-                        ))
-                    ) : (
-                        ["Vector Scaling", "Quantum Grid", "High Chroma", "Luminance Control"].map((spec) => (
-                            <li key={spec} className="flex justify-between items-center text-xs border-b border-white/5 pb-2">
-                                <span className="text-gray-500 font-headline tracking-widest">{spec}</span>
-                                <span className="text-orange-600 material-symbols-outlined text-sm">check_circle</span>
-                            </li>
-                        ))
-                    )}
-                </ul>
-            </div>
-
-            <div className="p-8 border border-orange-600/10 bg-orange-600/5 group hover:bg-orange-600/10 transition-colors">
-                <p className="text-gray-400 font-headline text-[10px] tracking-widest uppercase mb-4">WANT TO DISCUSS THIS SYSTEM?</p>
-                <button className="text-orange-500 font-headline font-black text-lg tracking-tighter uppercase group-hover:translate-x-2 transition-transform duration-300 flex items-center gap-2">
-                    INITIATE_COMMS <span className="material-symbols-outlined">alternate_email</span>
-                </button>
-            </div>
-        </aside>
       </div>
 
       <div className="mt-40 pt-12 border-t border-white/5 flex justify-between items-center">

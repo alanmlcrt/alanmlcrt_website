@@ -1,0 +1,73 @@
+{
+  "kind": "singleType",
+  "collectionName": "abouts",
+  "info": {
+    "singularName": "about",
+    "pluralName": "abouts",
+    "displayName": "About"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroTitle": {
+      "type": "string",
+      "default": "ALAN MOLCRETTE"
+    },
+    "heroSubtitle": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "linkedinUrl": {
+      "type": "string"
+    },
+    "profileSummary": {
+      "type": "text"
+    },
+    "profileApproach": {
+      "type": "text"
+    },
+    "profileObjective": {
+      "type": "text"
+    },
+    "profileQuote": {
+      "type": "text"
+    },
+    "cvUrl": {
+      "type": "string"
+    },
+    "experiences": {
+      "type": "component",
+      "repeatable": true,
+      "component": "about.experience"
+    },
+    "skills": {
+      "type": "component",
+      "repeatable": true,
+      "component": "about.skill"
+    },
+    "educations": {
+      "type": "component",
+      "repeatable": true,
+      "component": "about.education"
+    },
+    "interests": {
+      "type": "component",
+      "repeatable": true,
+      "component": "about.skill"
+    },
+    "languages": {
+      "type": "component",
+      "repeatable": true,
+      "component": "about.language"
+    },
+    "featuredProjects": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project.project"
+    }
+  }
+}
