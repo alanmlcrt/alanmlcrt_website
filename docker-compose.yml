@@ -4,23 +4,17 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: alan-backend
     restart: unless-stopped
-    env_file: .env
     environment:
-      DATABASE_CLIENT: ${DATABASE_CLIENT:-sqlite}
-      DATABASE_FILENAME: ${DATABASE_FILENAME:-.tmp/data.db}
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_FILENAME: ${DATABASE_FILENAME}
       JWT_SECRET: ${JWT_SECRET}
       ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
       APP_KEYS: ${APP_KEYS}
       NODE_ENV: production
     volumes:
-      - ./backend/public/uploads:/opt/app/public/uploads
-      - ./backend/.tmp:/opt/app/.tmp
-    # We expose the port so NPM can reach it by container name on the internal network
-    # But also publicly for initial setup if needed (can be removed later for security)
-    ports:
-      - "1337:1337"
+      - strapi_uploads:/opt/app/public/uploads
+      - strapi_data:/opt/app/.tmp
     networks:
       - alan-network
 
@@ -31,36 +25,18 @@ services:
       dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_STRAPI_URL: ${NEXT_PUBLIC_STRAPI_URL}
-    container_name: alan-frontend
     restart: unless-stopped
-    env_file: .env
     environment:
       NEXT_PUBLIC_STRAPI_URL: ${NEXT_PUBLIC_STRAPI_URL}
       NODE_ENV: production
-    ports:
-      - "3000:3000"
     networks:
       - alan-network
     depends_on:
       - strapi
 
-  # --- Reverse Proxy: Nginx Proxy Manager ---
-  # Helps managing domains, SSL certificates (Let's Encrypt) and redirection
-  npm:
-    image: 'jc21/nginx-proxy-manager:latest'
-    container_name: alan-npm
-    restart: unless-stopped
-    ports:
-      - '80:80'   # HTTP
-      - '443:443' # HTTPS
-      - '81:81'   # NPM Admin UI
-    volumes:
-      - ./npm/data:/data
-      - ./npm/letsencrypt:/etc/letsencrypt
-    networks:
-      - alan-network
-    # By default NPM uses SQLite, which is perfect for a VPS setup to save RAM.
-    # No need for a separate DB container for NPM unless you have 1000s of domains.
+volumes:
+  strapi_uploads:
+  strapi_data:
 
 networks:
   alan-network:
