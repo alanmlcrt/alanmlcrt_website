@@ -19,7 +19,10 @@ COPY . .
 # Next.js telemetry is disabled
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# If using npm comment out above and use below instead
+# Provide build-time environment variables
+ARG NEXT_PUBLIC_STRAPI_URL
+ENV NEXT_PUBLIC_STRAPI_URL=${NEXT_PUBLIC_STRAPI_URL}
+
 RUN npm run build
 
 # Production image, copy all the files and run next

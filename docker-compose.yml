@@ -1,8 +1,5 @@
-version: '3'
-
 services:
-
-
+  # --- Backend: Strapi ---
   strapi:
     build:
       context: ./backend
@@ -11,34 +8,35 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
-      DATABASE_CLIENT: sqlite
-      DATABASE_FILENAME: .tmp/data.db
+      DATABASE_CLIENT: ${DATABASE_CLIENT:-sqlite}
+      DATABASE_FILENAME: ${DATABASE_FILENAME:-.tmp/data.db}
       JWT_SECRET: ${JWT_SECRET}
       ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
       APP_KEYS: ${APP_KEYS}
-      NODE_ENV: ${NODE_ENV}
-      ## Optionnel - Cloudinary
-      # CLOUDINARY_NAME: ${CLOUDINARY_NAME}
-      # CLOUDINARY_KEY: ${CLOUDINARY_KEY}
-      # CLOUDINARY_SECRET: ${CLOUDINARY_SECRET}
+      NODE_ENV: production
     volumes:
       - ./backend/public/uploads:/opt/app/public/uploads
       - ./backend/.tmp:/opt/app/.tmp
+    # We expose the port so NPM can reach it by container name on the internal network
+    # But also publicly for initial setup if needed (can be removed later for security)
     ports:
       - "1337:1337"
     networks:
       - alan-network
 
-
+  # --- Frontend: Next.js ---
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_STRAPI_URL: ${NEXT_PUBLIC_STRAPI_URL}
     container_name: alan-frontend
     restart: unless-stopped
     env_file: .env
     environment:
       NEXT_PUBLIC_STRAPI_URL: ${NEXT_PUBLIC_STRAPI_URL}
+      NODE_ENV: production
     ports:
       - "3000:3000"
     networks:
@@ -46,45 +44,24 @@ services:
     depends_on:
       - strapi
 
-  ### OPTIONNEL MAIS RECOMMANDÉ: Nginx Proxy Manager
-  ### Pour gérer facilement vos domaines et certificats SSL (HTTPS)
+  # --- Reverse Proxy: Nginx Proxy Manager ---
+  # Helps managing domains, SSL certificates (Let's Encrypt) and redirection
   npm:
     image: 'jc21/nginx-proxy-manager:latest'
     container_name: alan-npm
     restart: unless-stopped
     ports:
-      - '80:80' # HTTP Public Port
-      - '443:443' # HTTPS Public Port
-      - '81:81' # Admin Web Port
-    environment:
-      DB_MYSQL_HOST: "npm_db"
-      DB_MYSQL_PORT: 3306
-      DB_MYSQL_USER: "npm"
-      DB_MYSQL_PASSWORD: "npm_password"
-      DB_MYSQL_NAME: "npm"
-      # Si vous préférez SQLite pour NPM (plus léger), commentez les lignes DB_MYSQL_* et commentez le service npm_db en bas.
+      - '80:80'   # HTTP
+      - '443:443' # HTTPS
+      - '81:81'   # NPM Admin UI
     volumes:
       - ./npm/data:/data
       - ./npm/letsencrypt:/etc/letsencrypt
     networks:
       - alan-network
-
-  # Base de données pour Nginx Proxy Manager (Optionnel si SQLite)
-  npm_db:
-    image: 'jc21/mariadb-aria:latest'
-    container_name: alan-npm-db
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: 'npm_root_password'
-      MYSQL_DATABASE: 'npm'
-      MYSQL_USER: 'npm'
-      MYSQL_PASSWORD: 'npm_password'
-    volumes:
-      - ./npm/mysql:/var/lib/mysql
-    networks:
-      - alan-network
+    # By default NPM uses SQLite, which is perfect for a VPS setup to save RAM.
+    # No need for a separate DB container for NPM unless you have 1000s of domains.
 
 networks:
   alan-network:
     driver: bridge
-
