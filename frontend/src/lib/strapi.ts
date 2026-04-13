@@ -12,7 +12,7 @@ export async function fetchStrapi(endpoint: string, options: RequestInit = {}) {
             signal: controller.signal,
             cache: isDev ? 'no-store' : 'default', // Don't cache in dev
             next: { 
-                revalidate: isDev ? 0 : 3600, // Revalidate immediately in dev
+                revalidate: isDev ? 0 : 60, // Update every minute instead of every hour
                 ...options.next 
             }
         });
