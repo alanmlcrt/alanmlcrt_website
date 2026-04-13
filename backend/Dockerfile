@@ -26,7 +26,7 @@ WORKDIR /opt/app
 COPY --from=builder /opt/app ./
 ENV PATH /opt/node_modules/.bin:$PATH
 
-RUN mkdir -p /opt/app/.tmp && chown -R node:node /opt/app/.tmp
+RUN mkdir -p /opt/app/.tmp && chmod -R 777 /opt/app/.tmp
 USER node
 
 EXPOSE 1337
