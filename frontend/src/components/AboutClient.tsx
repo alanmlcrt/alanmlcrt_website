@@ -203,7 +203,8 @@ export default function AboutClient({ data }: { data: any }) {
                         </div>
                         <p className="text-gray-400 font-light text-lg italic leading-relaxed">{item.description}</p>
                       </div>
-                      <div className="absolute left-[-5px] md:left-1/2 md:-ml-2 w-4 h-4 z-10 flex items-center justify-center">
+                      {/* Point de timeline corrigé pour mobile/desktop */}
+                      <div className="absolute left-[-8px] md:left-1/2 md:-ml-2 w-4 h-4 z-10 flex items-center justify-center">
                         <div className={`w-3 h-3 rotate-45 border border-orange-600/50 bg-black transition-all duration-500 ${item.isCurrent ? 'shadow-[0_0_15px_rgba(255,107,0,0.8)] border-orange-500 bg-orange-600' : 'group-hover:border-orange-500 group-hover:bg-orange-600/20'}`}></div>
                         {item.isCurrent && <div className="absolute inset-0 rotate-45 border border-orange-600/20 animate-ping"></div>}
                       </div>
@@ -212,8 +213,9 @@ export default function AboutClient({ data }: { data: any }) {
                   ) : (
                     <>
                       <div className="hidden md:block md:w-[45%]"></div>
-                      <div className="absolute left-[-5px] md:left-1/2 md:-ml-2 w-4 h-4 z-10 flex items-center justify-center">
-                        <div className="w-3 h-3 rotate-45 border border-orange-600/50 bg-black transition-all duration-500 group-hover:border-orange-500 group-hover:bg-orange-600/20"></div>
+                      {/* Point de timeline corrigé pour mobile/desktop */}
+                      <div className="absolute left-[-8px] md:left-1/2 md:-ml-2 w-4 h-4 z-10 flex items-center justify-center">
+                        <div className={`w-3 h-3 rotate-45 border border-orange-600/50 bg-black transition-all duration-500 group-hover:border-orange-500 group-hover:bg-orange-600/20`}></div>
                       </div>
                       <div className="md:w-[45%] text-left">
                         <h3 className="text-white font-headline font-bold text-2xl mb-1 uppercase text-glow-primary">{item.title}</h3>
@@ -237,7 +239,7 @@ export default function AboutClient({ data }: { data: any }) {
         <SectionReveal>
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
             <div>
-              <h2 className="font-headline text-5xl font-black tracking-widest text-white mb-2 uppercase text-glow-primary">CORE STACK</h2>
+              <h2 className="font-headline text-3xl md:text-5xl font-black tracking-widest text-white mb-2 uppercase text-glow-primary">CORE STACK</h2>
               <p className="text-orange-600 font-headline text-sm tracking-[0.5em] uppercase opacity-60">Compétences techniques & de supervision</p>
             </div>
             <div className="h-[1px] flex-1 bg-white/5 mx-8 hidden md:block"></div>
@@ -263,7 +265,7 @@ export default function AboutClient({ data }: { data: any }) {
           <SectionReveal>
               <div className="flex items-center gap-4 mb-20">
                   <Rocket className="text-orange-600" size={24} />
-                  <h2 className="font-headline text-5xl font-black tracking-widest text-white uppercase text-glow-primary">PROJETS_PHARES</h2>
+                  <h2 className="font-headline text-3xl md:text-5xl font-black tracking-widest text-white uppercase text-glow-primary">PROJETS_PHARES</h2>
               </div>
           </SectionReveal>
 
