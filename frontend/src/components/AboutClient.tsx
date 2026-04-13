@@ -195,7 +195,8 @@ export default function AboutClient({ data }: { data: any }) {
                 <div className="relative flex flex-col md:flex-row items-center md:justify-between group">
                   {side === "right" ? (
                     <>
-                      <div className="md:w-[45%] md:text-right">
+                      {/* Conteneur de texte avec padding sur mobile pour éviter l'overlap */}
+                      <div className="w-full md:w-[45%] pl-10 md:pl-0 md:text-right">
                         <h3 className="text-orange-600 font-headline font-bold text-2xl mb-1 uppercase text-glow">{item.title}</h3>
                         <div className="flex items-center gap-2 md:justify-end mb-4 opacity-80">
                            <p className="text-white font-headline text-sm tracking-widest">{item.company} // {item.date}</p>
@@ -204,7 +205,7 @@ export default function AboutClient({ data }: { data: any }) {
                         <p className="text-gray-400 font-light text-lg italic leading-relaxed">{item.description}</p>
                       </div>
                       {/* Point de timeline corrigé pour mobile/desktop */}
-                      <div className="absolute left-[-8px] md:left-1/2 md:-ml-2 w-4 h-4 z-10 flex items-center justify-center">
+                      <div className="absolute left-[-8px] md:left-1/2 md:-ml-2 top-2 md:top-auto w-4 h-4 z-10 flex items-center justify-center">
                         <div className={`w-3 h-3 rotate-45 border border-orange-600/50 bg-black transition-all duration-500 ${item.isCurrent ? 'shadow-[0_0_15px_rgba(255,107,0,0.8)] border-orange-500 bg-orange-600' : 'group-hover:border-orange-500 group-hover:bg-orange-600/20'}`}></div>
                         {item.isCurrent && <div className="absolute inset-0 rotate-45 border border-orange-600/20 animate-ping"></div>}
                       </div>
@@ -214,10 +215,11 @@ export default function AboutClient({ data }: { data: any }) {
                     <>
                       <div className="hidden md:block md:w-[45%]"></div>
                       {/* Point de timeline corrigé pour mobile/desktop */}
-                      <div className="absolute left-[-8px] md:left-1/2 md:-ml-2 w-4 h-4 z-10 flex items-center justify-center">
+                      <div className="absolute left-[-8px] md:left-1/2 md:-ml-2 top-2 md:top-auto w-4 h-4 z-10 flex items-center justify-center">
                         <div className={`w-3 h-3 rotate-45 border border-orange-600/50 bg-black transition-all duration-500 group-hover:border-orange-500 group-hover:bg-orange-600/20`}></div>
                       </div>
-                      <div className="md:w-[45%] text-left">
+                      {/* Conteneur de texte avec padding sur mobile pour éviter l'overlap */}
+                      <div className="w-full md:w-[45%] pl-10 md:pl-0 text-left">
                         <h3 className="text-white font-headline font-bold text-2xl mb-1 uppercase text-glow-primary">{item.title}</h3>
                         <div className="flex items-center gap-2 mb-4 opacity-80">
                            <span className="w-1.5 h-1.5 rounded-none rotate-45 bg-orange-600 animate-pulse"></span>
