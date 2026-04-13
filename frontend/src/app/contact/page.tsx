@@ -51,7 +51,7 @@ export default function Contact() {
             GET IN <span className="text-orange-600">TOUCH</span>
           </h1>
           <p className="text-gray-400 font-headline text-xl md:text-2xl font-light tracking-widest max-w-2xl uppercase">
-            Initialisez une connexion pour discuter de vos projets IOT et de supervision de données.
+            Entrez en contact avec moi car un échange sera toujours plus humain et représentatif qu'une vitrine de mes expériences et compétences ;)
           </p>
         </SectionReveal>
       </section>
@@ -59,12 +59,12 @@ export default function Contact() {
       {/* Contact Cards Grid */}
       <section className="max-w-7xl mx-auto px-8 py-20 relative z-10 mb-40">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          
+
           {/* Email Card */}
           <SectionReveal direction="right" delay={0.1}>
             <div className="group relative bg-[#050505] border border-white/5 p-12 overflow-hidden h-full flex flex-col justify-between">
-              
-              
+
+
               <div className="relative z-10">
                 <div className="flex justify-between items-start mb-16">
                   <div className="p-4 bg-orange-600/10 border border-orange-600/30">
@@ -77,18 +77,18 @@ export default function Contact() {
 
                 <h2 className="font-headline text-white font-black text-4xl mb-4 tracking-tighter uppercase text-glow-primary">EMAIL</h2>
                 <p className="text-gray-400 font-light text-lg mb-12 max-w-xs">
-                  Pour des demandes professionnelles, collaborations ou questions techniques.
+                  Si vous voulez en apprendre d'avantage sur mon profil ou pour toute autre question, contactez moi !
                 </p>
               </div>
 
               <div className="relative z-10 flex flex-col sm:flex-row gap-4">
-                <a 
+                <a
                   href={`mailto:${email}`}
                   className="flex-1 light-pipe text-on-primary px-8 py-4 font-headline font-bold uppercase tracking-widest text-xs text-center flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform"
                 >
                   SEND_MESSAGE <ExternalLink size={14} />
                 </a>
-                <button 
+                <button
                   onClick={copyEmail}
                   className="flex-1 bg-white/5 border border-white/10 text-white px-8 py-4 font-headline font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-2 hover:bg-white/10 transition-colors"
                 >
@@ -105,20 +105,20 @@ export default function Contact() {
           {/* LinkedIn Card */}
           <SectionReveal direction="left" delay={0.2}>
             <div className="group relative bg-[#050505] border border-white/5 p-12 overflow-hidden h-full flex flex-col justify-between">
-              
+
 
               <div className="relative z-10">
                 <div className="flex justify-between items-start mb-16">
                   <div className="p-4 bg-orange-600/10 border border-orange-600/30">
-                    <svg 
-                      width="32" 
-                      height="32" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       className="text-orange-600"
                     >
                       <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
@@ -133,12 +133,12 @@ export default function Contact() {
 
                 <h2 className="font-headline text-white font-black text-4xl mb-4 tracking-tighter uppercase text-glow-primary">LINKEDIN</h2>
                 <p className="text-gray-400 font-light text-lg mb-12 max-w-xs">
-                  Suivez mon activité, mes recherches et connectez-vous avec mon réseau professionnel.
+                  Suivez mon activité et connectez-vous sur LinkedIn.
                 </p>
               </div>
 
               <div className="relative z-10">
-                <a 
+                <a
                   href={linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -169,7 +169,7 @@ export default function Contact() {
                 <p className="text-gray-500 font-headline text-[10px] tracking-[0.3em] uppercase">RÉPONSE TYPIQUE EN MOINS DE 24 HEURES</p>
               </div>
             </div>
-            
+
             <div className="flex gap-4">
               <div className="px-6 py-2 border border-white/5 font-headline text-[10px] tracking-widest text-gray-500 uppercase">
                 LATENCY: 12ms
