@@ -75,8 +75,8 @@ export default function AboutClient({ data }: { data: any }) {
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10">
           <SectionReveal direction="down">
             <div className="flex items-center gap-4 mb-6">
-                <span className="w-12 h-[1px] bg-orange-600"></span>
-                <p className="text-orange-600 font-headline text-sm tracking-[0.5em] uppercase">INGÉNIEUR_DIPLÔMÉ_JUNIA_ISEN</p>
+                <span className="w-8 md:w-12 h-[1px] bg-orange-600"></span>
+                <p className="text-orange-600 font-headline text-[10px] md:text-sm tracking-[0.2em] md:tracking-[0.5em] uppercase whitespace-nowrap">INGÉNIEUR_DIPLÔMÉ_JUNIA_ISEN</p>
             </div>
             <h1 className="font-headline text-white font-black text-6xl md:text-9xl tracking-tighter mb-4 leading-none text-glow">
               {heroTitle.split(' ')[0]} <span className="text-orange-600">{heroTitle.split(' ').slice(1).join(' ')}</span>
