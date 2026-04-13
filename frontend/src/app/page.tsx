@@ -73,25 +73,23 @@ export default function Home() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 text-gray-400 font-light text-lg md:text-xl leading-relaxed">
                 <div className="space-y-8">
                   <p>
-                    C&apos;est difficile de mettre en valeur ses compétences sur une seule page de CV. Un site personnalisé est une manière originale de se mettre en avant. C&apos;est aussi un petit projet que j&apos;avais : <span className="text-white">héberger mon propre site web sur un VPS en partant de zéro</span>. Ce VPS me servira aussi pour d&apos;autres projets à l'avenir.
+                    L&apos;objectif premier de ce site n&apos;est pas seulement de créer un CV plus esthétique, mais également de <span className="text-white font-normal underline decoration-orange-600/30 underline-offset-8">partager mes trouvailles, mes projets et des articles</span>. C&apos;est une manière originale et complète de se mettre en avant au-delà du CV.
                   </p>
                   <p>
-                    Sur ce site, il y a une touche de personnalisation, mais il y aura également des expériences et projets plus personnels que je mettrai en avant. Ce seront des petits projets qui ne mériteront pas forcément un post, ou bien une ligne sur le CV, mais qui mériteront d&apos;être mentionnés ici.
+                    C&apos;est aussi un défi personnel : héberger mon propre site sur un VPS en partant de zéro. Cette infrastructure me servira pour tous mes futurs projets.
+                  </p>
+                  <p>
+                    J&apos;estime que juger une personne uniquement par un CV peut masquer, voire <span className="text-orange-500">discriminer</span>, des profils possédant une forte capacité d&apos;adaptation et un excellent savoir-être.
                   </p>
                 </div>
                 <div className="space-y-8">
                   <p>
-                    Car oui, comme mentionné dans mon profil, je suis quelqu&apos;un de curieux et pluridisciplinaire, et j&apos;aime toucher à tout. <span className="text-orange-600/80">Chaque jour, je m&apos;informe, j&apos;apprends, je bidouille, je bricole car il n'y a qu'en faisant qu'on apprends. Il est impossible d'apprendre sans expérimenter.</span>
+                    Comme mentionné dans mon profil, je suis quelqu&apos;un de curieux et j&apos;aime toucher à tout. <span className="text-orange-600/80">Chaque jour, je m&apos;informe, j&apos;apprends, je bidouille et je bricole car il n&apos;y a qu&apos;en faisant que l&apos;on apprend réellement.</span>
                   </p>
                   <p>
-                    J&apos;estime que ces petites expériences valent la peine d&apos;être mises en avant quelque part pour tracer mon savoir au fil du temps. Ce sont des petits projets qui peuvent attirer l'attention et qui peuvent aider les autres.
+                    J&apos;estime que ces petites expériences méritent d&apos;être mises en avant pour tracer mon savoir au fil du temps. Ce sont des projets qui peuvent attirer l&apos;attention, inspirer ou aider les autres.
                   </p>
                 </div>
-              </div>
-
-              <div className="mt-16 flex items-center gap-4 py-4 px-8 border border-white/5 bg-white/[0.02]">
-                <span className="w-2 h-2 rounded-full bg-orange-600 animate-pulse"></span>
-                <p className="font-headline text-[10px] tracking-[0.3em] text-gray-500 uppercase">STATUS: SYSTEM_SELF_HOSTED // VPS_READY</p>
               </div>
             </div>
           </SectionReveal>
