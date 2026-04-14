@@ -73,7 +73,10 @@ export default function HomeClient() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 text-gray-400 font-light text-lg md:text-xl leading-relaxed">
                 <div className="space-y-8">
                   <p>
-                    L&apos;objectif premier de ce site n&apos;est pas seulement de créer un CV plus esthétique, mais également de <span className="text-white font-normal underline decoration-orange-600/30 underline-offset-8">partager mes trouvailles, mes projets et des articles</span>. C&apos;est une manière originale et complète de se mettre en avant au-delà du CV.
+                    <span className="text-white font-bold">Alan Molcrette</span> est un ingénieur diplômé en électronique et informatique spécialisé en <span className="text-orange-500">IoT</span>. Ce site est une plateforme dédiée au partage de projets techniques, d&apos;articles sur la supervision de données et l&apos;automatisation industrielle.
+                  </p>
+                  <p>
+                    L&apos;objectif est de proposer une vision concrète de mes compétences au-delà d&apos;un simple CV, en documentant des solutions réelles et des innovations dans les industries connectées.
                   </p>
                   <p>
                     C&apos;est aussi un défi personnel : héberger mon propre site sur un VPS en partant de zéro. Cette infrastructure me servira pour tous mes futurs projets.

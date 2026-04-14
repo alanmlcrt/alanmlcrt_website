@@ -1,14 +1,16 @@
-alanmlcrt
+# Alan Molcrette | Portfolio & Blog
+> Portfolio d'Alan Molcrette, ingénieur en électronique, informatique et IoT, spécialisé dans la supervision de données et l'automatisation.
 
-Portfolio d'Alan Molcrette, ingénieur en électronique, IoT et supervision de données.
+## Key Sections
+- [Accueil](https://alanmlcrt.fr/): Introduction et manifeste du site.
+- [À Propos](https://alanmlcrt.fr/about): Biographie détaillée, expériences professionnelles (ENEDIS, RTE), compétences techniques (Python, Power BI, ESP32, Docker) et formation (JUNIA ISEN).
+- [Projets](https://alanmlcrt.fr/projects): Liste des projets techniques et articles de blog.
+- [Contact](https://alanmlcrt.fr/contact): Moyens de contact (LinkedIn, Email).
 
-Pages principales:
-- / — Accueil et présentation
-- /about — Parcours, compétences, expériences et CV
-- /projects — Projets et articles techniques
-- /contact — Contact et liens professionnels
-
-Points clés:
-- Contenu orienté IoT, supervision de données et automatisation
-- Projets techniques publiés via Strapi
-- Contact professionnel via email et LinkedIn
+## Author Details
+- **Name**: Alan Molcrette
+- **Role**: Ingénieur Industries Connectées / IoT
+- **Location**: Lille, France
+- **Expertise**: Électronique, Informatique Industrielle, IoT, Data Supervision, Power BI, Python, Docker.
+- **LinkedIn**: [LinkedIn Profile](https://www.linkedin.com/in/alan-molcrette/)
+- **Email**: molcrette.alan@gmail.com

@@ -9,7 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   const projectEntries = projects.map((project: any) => ({
     url: `${baseUrl}/projects/${project.attributes.slug}`,
-    lastModified: new URLSearchParams(project.attributes.updatedAt).toString(), // simplified
+    lastModified: new Date(project.attributes.updatedAt),
   }));
 
   return [

@@ -37,9 +37,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   }
 
-  const imageUrl = getStrapiMedia(project.image?.url);
-  const title = project.seoTitle || project.title;
-  const description = buildProjectDescription(project);
+  const imageUrl = getStrapiMedia(project.seo?.metaImage?.url || project.image?.url);
+  const title = project.seo?.metaTitle || project.title;
+  const description = project.seo?.metaDescription || buildProjectDescription(project);
 
   return {
     title,
@@ -108,12 +108,30 @@ export default async function ProjectSingle({ params }: { params: Promise<{ slug
   const imageUrl = getStrapiMedia(project.image?.url);
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    name: project.title,
-    description: buildProjectDescription(project),
+    "@type": "Article",
+    headline: project.seo?.metaTitle || project.title,
+    description: project.seo?.metaDescription || buildProjectDescription(project),
     datePublished: project.date,
+    dateModified: project.updatedAt || project.date,
     url: `${siteUrl}/projects/${slug}`,
-    image: imageUrl || undefined,
+    image: imageUrl ? [imageUrl] : [`${siteUrl}/photo alan.jpg`],
+    author: {
+      "@type": "Person",
+      name: "Alan Molcrette",
+      url: siteUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "alanmlcrt",
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/photo alan.jpg`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/projects/${slug}`,
+    },
   };
 
   return (
@@ -141,8 +159,22 @@ export default async function ProjectSingle({ params }: { params: Promise<{ slug
             
             <div className="flex flex-wrap gap-12 items-center border-t border-white/5 pt-8">
               <div>
+                <p className="text-gray-600 font-headline text-[10px] tracking-widest uppercase mb-1">AUTHOR</p>
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 rounded-full overflow-hidden relative border border-orange-600/30">
+                    <Image src="/photo alan.jpg" alt="Alan Molcrette" fill className="object-cover" />
+                  </div>
+                  <span className="text-gray-400 font-headline text-sm tracking-widest">Alan Molcrette</span>
+                </div>
+              </div>
+              <div>
                 <p className="text-gray-600 font-headline text-[10px] tracking-widest uppercase mb-1">DATE_STAMP</p>
                 <span className="text-gray-400 font-headline text-sm tracking-widest">{project.date}</span>
+                {project.updatedAt && project.updatedAt !== project.date && (
+                  <p className="text-[8px] text-gray-700 font-headline tracking-tighter mt-1 italic">
+                    UPDATED: {new Date(project.updatedAt).toLocaleDateString('fr-FR')}
+                  </p>
+                )}
               </div>
               <div>
                 <p className="text-gray-600 font-headline text-[10px] tracking-widest uppercase mb-1">TYPE</p>

@@ -4,7 +4,7 @@ import AboutClient from "@/components/AboutClient";
 const siteUrl = "https://alanmlcrt.fr";
 
 async function getAboutData() {
-  const populate = 'populate[experiences]=*&populate[skills]=*&populate[educations]=*&populate[interests]=*&populate[languages]=*&populate[featuredProjects][populate]=*';
+  const populate = 'populate[experiences]=*&populate[skills]=*&populate[educations]=*&populate[interests]=*&populate[languages]=*&populate[featuredProjects][populate]=*&populate[seo][populate]=*';
   const data = await fetchStrapi(`about?${populate}`);
 
   if (data && !Array.isArray(data)) return data;
@@ -14,10 +14,11 @@ async function getAboutData() {
 
 export async function generateMetadata() {
   const aboutData = await getAboutData();
+  const seo = aboutData?.seo;
   const heroSubtitle = aboutData?.heroSubtitle || "Ingénieur Industries Connectées // IoT // Data Supervision";
   const profileSummary = aboutData?.profileSummary || "Découvrez mon parcours d'ingénieur en électronique et informatique spécialisé en IoT et Dataviz.";
-  const description = aboutData?.seoDescription || `${heroSubtitle}. ${profileSummary}`;
-  const title = aboutData?.seoTitle || "À Propos | Alan Molcrette";
+  const description = seo?.metaDescription || aboutData?.seoDescription || `${heroSubtitle}. ${profileSummary}`;
+  const title = seo?.metaTitle || aboutData?.seoTitle || "À Propos | Alan Molcrette";
 
   return {
     title,
