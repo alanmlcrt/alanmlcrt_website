@@ -10,6 +10,8 @@ export default {
    */
   register(/* { strapi } */) {},
 
+              seoTitle: "V'Lille Tracker | Projet IoT et mobilité",
+              seoDescription: "Application React Native pour suivre la disponibilité des vélos V'Lille en temps réel et historiser les flux.",
   /**
    * An asynchronous bootstrap function that runs before
    * your application gets started.
@@ -19,6 +21,8 @@ export default {
    */
   async bootstrap({ strapi }) {
     strapi.log.info('--- BOOTSTRAP STARTING ---');
+              seoTitle: "Bassin Acoustique Intelligent | IoT et supervision",
+              seoDescription: "Projet IoT de supervision acoustique avec Docker, MQTT et Home Assistant pour le traitement de capteurs critiques.",
 
     try {
       const publicRole = await strapi.db.query('plugin::users-permissions.role').findOne({
@@ -76,6 +80,8 @@ export default {
               data: {
                   heroTitle: 'ALAN MOLCRETTE',
                   heroSubtitle: 'Industries Connectées // IoT // Data Supervision',
+                  seoTitle: 'Alan Molcrette | Ingénieur IoT et Data Supervision',
+                  seoDescription: 'Portfolio d\'Alan Molcrette, ingénieur en électronique, IoT et supervision de données.',
                   email: 'molcrette.alan@gmail.com',
                   linkedinUrl: 'https://www.linkedin.com/in/alan-molcrette/',
                   profileSummary: "Ingénieur diplômé en électronique et informatique, spécialisé en IoT. Je souhaite mettre mes compétences au service de projets innovants au sein d'industries connectées pour optimiser les processus et valoriser la donnée.",

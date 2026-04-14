@@ -21,6 +21,12 @@
       "targetField": "title",
       "required": true
     },
+    "seoTitle": {
+      "type": "string"
+    },
+    "seoDescription": {
+      "type": "text"
+    },
     "category": {
       "type": "enumeration",
       "enum": [

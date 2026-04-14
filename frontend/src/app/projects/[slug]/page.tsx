@@ -5,6 +5,64 @@ import { fetchStrapi, getStrapiMedia } from "@/lib/strapi";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+const siteUrl = "https://alanmlcrt.fr";
+
+async function getProject(slug: string) {
+  const projects = await fetchStrapi(`projects?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=image`);
+  return projects[0];
+}
+
+function buildProjectDescription(project: any) {
+  const seoDescription = project?.seoDescription;
+  if (seoDescription) return seoDescription;
+
+  const content = String(project?.content || "")
+    .replace(/[#*_>`\[\]()]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (!content) return `Projet ${project?.title || "Alan Molcrette"} sur l'IoT et la supervision de données.`;
+
+  return content.slice(0, 160).trim();
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const project = await getProject(slug);
+
+  if (!project) {
+    return {
+      title: "Projet introuvable | Alan Molcrette",
+      description: "Le projet demandé n'a pas pu être trouvé.",
+    };
+  }
+
+  const imageUrl = getStrapiMedia(project.image?.url);
+  const title = project.seoTitle || project.title;
+  const description = buildProjectDescription(project);
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/projects/${slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${siteUrl}/projects/${slug}`,
+      type: "article",
+      images: imageUrl ? [imageUrl] : ["/photo alan.jpg"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: imageUrl ? [imageUrl] : ["/photo alan.jpg"],
+    },
+  };
+}
+
 const markdownComponents = {
   h2: ({node, ...props}: any) => <h2 className="text-white font-headline text-3xl font-bold mt-16 mb-8 uppercase tracking-tight border-l-4 border-orange-600 pl-6" {...props} />,
   h3: ({node, ...props}: any) => <h3 className="text-orange-500 font-headline text-xl font-bold mt-12 mb-6 uppercase tracking-widest" {...props} />,
@@ -42,18 +100,25 @@ const markdownComponents = {
 
 export default async function ProjectSingle({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  
-  const populate = 'populate=image';
 
-  const projects = await fetchStrapi(`projects?filters[slug][$eq]=${encodeURIComponent(slug)}&${populate}`);
-  const project = projects[0];
+  const project = await getProject(slug);
 
   if (!project) return notFound();
 
   const imageUrl = getStrapiMedia(project.image?.url);
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.title,
+    description: buildProjectDescription(project),
+    datePublished: project.date,
+    url: `${siteUrl}/projects/${slug}`,
+    image: imageUrl || undefined,
+  };
 
   return (
     <article className="max-w-5xl mx-auto px-8 py-20 w-full relative">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <Link href="/projects" className="inline-flex items-center gap-2 text-gray-500 hover:text-orange-400 font-headline text-[10px] tracking-[0.3em] uppercase mb-12 transition-colors border-b border-white/5 pb-1">
         <span className="material-symbols-outlined text-sm">arrow_back</span> Return to Archive
       </Link>

@@ -12,6 +12,8 @@ Thumbs.db
 # Global & Root
 node_modules/
 .env
+ultimate-seo-geo/
+.venv/
 
 # ========================
 # FRONTEND (Next.js)
