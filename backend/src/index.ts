@@ -9,9 +9,6 @@ export default {
    * This gives you an opportunity to extend code.
    */
   register(/* { strapi } */) {},
-
-              seoTitle: "V'Lille Tracker | Projet IoT et mobilité",
-              seoDescription: "Application React Native pour suivre la disponibilité des vélos V'Lille en temps réel et historiser les flux.",
   /**
    * An asynchronous bootstrap function that runs before
    * your application gets started.
@@ -21,8 +18,6 @@ export default {
    */
   async bootstrap({ strapi }) {
     strapi.log.info('--- BOOTSTRAP STARTING ---');
-              seoTitle: "Bassin Acoustique Intelligent | IoT et supervision",
-              seoDescription: "Projet IoT de supervision acoustique avec Docker, MQTT et Home Assistant pour le traitement de capteurs critiques.",
 
     try {
       const publicRole = await strapi.db.query('plugin::users-permissions.role').findOne({
