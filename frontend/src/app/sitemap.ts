@@ -5,12 +5,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://alanmlcrt.fr';
 
   // Fetch projects/articles to include them in the sitemap
-  const projects = await fetchStrapi('projects?populate=*');
-  
-  const projectEntries = projects.map((project: any) => ({
-    url: `${baseUrl}/projects/${project.attributes.slug}`,
-    lastModified: new Date(project.attributes.updatedAt),
-  }));
+  // Strapi v5 returns flat objects (no .attributes wrapper)
+  const projects = await fetchStrapi('projects?fields[0]=slug&fields[1]=updatedAt');
+
+  const projectEntries = Array.isArray(projects)
+    ? projects
+        .filter((project: any) => project?.slug)  // skip any malformed entries
+        .map((project: any) => ({
+          url: `${baseUrl}/projects/${project.slug}`,
+          lastModified: project.updatedAt ? new Date(project.updatedAt) : new Date(),
+        }))
+    : [];
 
   return [
     {

@@ -4,7 +4,9 @@ import AboutClient from "@/components/AboutClient";
 const siteUrl = "https://alanmlcrt.fr";
 
 async function getAboutData() {
-  const populate = 'populate[experiences]=*&populate[skills]=*&populate[educations]=*&populate[interests]=*&populate[languages]=*&populate[featuredProjects][populate]=*&populate[seo][populate]=*';
+  // Note: populate[seo]= is intentionally omitted here until the backend schema is deployed.
+  // Once the Strapi backend is updated, the seo component will be included automatically.
+  const populate = 'populate[experiences]=*&populate[skills]=*&populate[educations]=*&populate[interests]=*&populate[languages]=*&populate[featuredProjects][populate]=*';
   const data = await fetchStrapi(`about?${populate}`);
 
   if (data && !Array.isArray(data)) return data;
