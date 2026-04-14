@@ -9,7 +9,6 @@ export default {
    * This gives you an opportunity to extend code.
    */
   register(/* { strapi } */) {},
-
   /**
    * An asynchronous bootstrap function that runs before
    * your application gets started.
@@ -76,6 +75,8 @@ export default {
               data: {
                   heroTitle: 'ALAN MOLCRETTE',
                   heroSubtitle: 'Industries Connectées // IoT // Data Supervision',
+                  seoTitle: 'Alan Molcrette | Ingénieur IoT et Data Supervision',
+                  seoDescription: 'Portfolio d\'Alan Molcrette, ingénieur en électronique, IoT et supervision de données.',
                   email: 'molcrette.alan@gmail.com',
                   linkedinUrl: 'https://www.linkedin.com/in/alan-molcrette/',
                   profileSummary: "Ingénieur diplômé en électronique et informatique, spécialisé en IoT. Je souhaite mettre mes compétences au service de projets innovants au sein d'industries connectées pour optimiser les processus et valoriser la donnée.",

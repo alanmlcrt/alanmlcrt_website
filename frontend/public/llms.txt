@@ -1,0 +1,14 @@
+alanmlcrt
+
+Portfolio d'Alan Molcrette, ingénieur en électronique, IoT et supervision de données.
+
+Pages principales:
+- / — Accueil et présentation
+- /about — Parcours, compétences, expériences et CV
+- /projects — Projets et articles techniques
+- /contact — Contact et liens professionnels
+
+Points clés:
+- Contenu orienté IoT, supervision de données et automatisation
+- Projets techniques publiés via Strapi
+- Contact professionnel via email et LinkedIn

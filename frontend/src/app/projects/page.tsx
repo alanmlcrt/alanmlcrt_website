@@ -2,6 +2,14 @@ import Link from "next/link";
 import { fetchStrapi, getStrapiMedia } from "@/lib/strapi";
 import Image from "next/image";
 
+export const metadata = {
+  title: "Projets | Alan Molcrette",
+  description: "Articles, projets et retours d'expérience autour de l'IoT, de la supervision de données et des systèmes connectés.",
+  alternates: {
+    canonical: "/projects",
+  },
+};
+
 export default async function Projects() {
   const projects = await fetchStrapi('projects?populate=*');
 
