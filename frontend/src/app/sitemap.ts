@@ -1,47 +1,42 @@
-import type { MetadataRoute } from "next";
-import { fetchStrapi } from "@/lib/strapi";
-
-const siteUrl = "https://alanmlcrt.fr";
+import { MetadataRoute } from 'next';
+import { fetchStrapi } from '@/lib/strapi';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const projects = await fetchStrapi("projects?populate=*");
+  const baseUrl = 'https://alanmlcrt.fr';
 
-  const projectUrls = Array.isArray(projects)
-    ? projects
-        .filter((project) => project?.slug)
-        .map((project) => ({
-          url: `${siteUrl}/projects/${project.slug}`,
-          lastModified: project.date ? new Date(project.date) : new Date(),
-          changeFrequency: "monthly" as const,
-          priority: 0.7,
-        }))
-    : [];
+  // Fetch projects/articles to include them in the sitemap
+  const projects = await fetchStrapi('projects?populate=*');
+  
+  const projectEntries = projects.map((project: any) => ({
+    url: `${baseUrl}/projects/${project.attributes.slug}`,
+    lastModified: new URLSearchParams(project.attributes.updatedAt).toString(), // simplified
+  }));
 
   return [
     {
-      url: siteUrl,
+      url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: "weekly",
+      changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: `${siteUrl}/about`,
+      url: `${baseUrl}/about`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${siteUrl}/projects`,
+      url: `${baseUrl}/projects`,
       lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
+      changeFrequency: 'weekly',
+      priority: 0.8,
     },
     {
-      url: `${siteUrl}/contact`,
+      url: `${baseUrl}/contact`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: 'monthly',
       priority: 0.5,
     },
-    ...projectUrls,
+    ...projectEntries,
   ];
 }
