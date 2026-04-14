@@ -39,5 +39,13 @@
   "strapi": {
     "uuid": "5ff7ffee-f417-4642-be78-50c832e0cb0a",
     "installId": "bd4b3b194748f07bd1ed93fb84ca660ee5780162b49ce3c0e8e1e35181b30110"
+  },
+  "overrides": {
+    "lodash": "^4.17.21",
+    "axios": "^1.7.4",
+    "follow-redirects": "^1.15.6",
+    "@koa/router": "^15.0.0",
+    "rimraf": "^5.0.0",
+    "glob": "^11.0.0"
   }
 }
