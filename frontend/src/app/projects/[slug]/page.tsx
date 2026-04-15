@@ -79,18 +79,25 @@ const markdownComponents = {
       <span>{props.children}</span>
     </li>
   ),
+  a: ({node, ...props}: any) => (
+    <a 
+      className="text-orange-500 hover:text-orange-400 font-bold underline decoration-orange-500/30 underline-offset-4 transition-all hover:decoration-orange-500" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      {...props} 
+    />
+  ),
   img: ({node, ...props}: any) => {
     const src = getStrapiMedia(props.src);
     
     if (!src) return null;
 
     return (
-      <span className="block my-12 group relative aspect-video w-full">
-          <Image 
+      <span className="block my-12 group relative w-full">
+          <img 
               src={src}
               alt={props.alt || "Project image"}
-              fill
-              className="object-cover border border-white/5 grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-[1.02]" 
+              className="w-full h-auto border border-white/5 grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-[1.01]" 
           />
           <span className="absolute -bottom-4 left-0 text-[10px] text-gray-600 font-headline tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">IMG_REF // {props.alt}</span>
       </span>
@@ -183,17 +190,32 @@ export default async function ProjectSingle({ params }: { params: Promise<{ slug
                     {project.category}
                 </span>
               </div>
+              {project.status && (
+                <div>
+                  <p className="text-gray-600 font-headline text-[10px] tracking-widest uppercase mb-1">STATUS</p>
+                  <span className="text-green-500 font-headline text-sm tracking-widest flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                      {project.status}
+                  </span>
+                </div>
+              )}
+              {project.tech_stack && (
+                <div className="md:col-span-2 lg:col-span-1">
+                  <p className="text-gray-600 font-headline text-[10px] tracking-widest uppercase mb-1">TECH_STACK</p>
+                  <span className="text-gray-400 font-headline text-sm tracking-widest">
+                    {project.tech_stack}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 
           {imageUrl && (
-            <div className="w-full md:w-64 lg:w-80 shrink-0 aspect-square bg-surface-container-low border border-white/5 overflow-hidden group relative">
-                <Image 
+            <div className="w-full md:w-64 lg:w-80 shrink-0 bg-surface-container-low border border-white/5 overflow-hidden group relative">
+                <img 
                     src={imageUrl} 
                     alt={project.title}
-                    fill
-                    priority
-                    className="object-cover transition-all duration-1000 scale-105 group-hover:scale-100"
+                    className="w-full h-auto transition-all duration-1000 scale-105 group-hover:scale-100"
                 />
                 {/* Telemetry Overlay */}
                 <div className="absolute top-4 left-4 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity">

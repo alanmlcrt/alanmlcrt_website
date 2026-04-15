@@ -47,6 +47,12 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "status": {
+      "type": "string"
+    },
+    "tech_stack": {
+      "type": "string"
     }
   }
 }
