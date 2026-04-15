@@ -236,7 +236,7 @@ export default async function ProjectSingle({ params }: { params: Promise<{ slug
 
             <div className="space-y-24">
                 {project.content && (
-                   <div className="prose prose-invert prose-orange max-w-none font-light leading-relaxed text-gray-400 text-lg">
+                   <div className="prose prose-invert prose-orange max-w-none font-light leading-relaxed text-gray-400 text-lg whitespace-pre-line">
                     <ReactMarkdown 
                         remarkPlugins={[remarkGfm]}
                         components={markdownComponents}
