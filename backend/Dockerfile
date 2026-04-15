@@ -2,14 +2,14 @@ FROM node:20-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
-RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev git
+RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev git libc6-compat
 WORKDIR /opt/
 COPY package.json package-lock.json ./
 RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install
 
 # Rebuild the source code only when needed
 FROM base AS builder
-RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev git
+RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev git libc6-compat
 WORKDIR /opt/
 COPY --from=deps /opt/node_modules ./node_modules
 WORKDIR /opt/app
@@ -19,7 +19,7 @@ RUN npm run build
 
 # Production image, copy all the files and run strapi
 FROM base AS runner
-RUN apk add --no-cache vips-dev
+RUN apk add --no-cache vips-dev libc6-compat
 WORKDIR /opt/
 COPY --from=deps /opt/node_modules ./node_modules
 WORKDIR /opt/app
