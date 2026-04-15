@@ -6,6 +6,9 @@ RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev l
 WORKDIR /opt/
 COPY package.json package-lock.json ./
 RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install
+# Force install the correct SWC binary for Alpine Linux (musl)
+# The lockfile from Windows doesn't include it
+RUN npm install @swc/core-linux-x64-musl --no-save
 
 # Rebuild the source code only when needed
 FROM base AS builder
