@@ -72,11 +72,11 @@ const markdownComponents = {
         {props.children}
     </blockquote>
   ),
-  ul: ({node, ...props}: any) => <ul className="space-y-4 my-8 list-none p-0" {...props} />,
+  ul: ({node, ...props}: any) => <ul className="space-y-1 my-6 list-none p-0 whitespace-normal" {...props} />,
   li: ({node, ...props}: any) => (
     <li className="flex items-start gap-3" {...props}>
       <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-orange-600 flex-shrink-0"></span>
-      <span>{props.children}</span>
+      <span className="whitespace-normal">{props.children}</span>
     </li>
   ),
   a: ({node, ...props}: any) => (
