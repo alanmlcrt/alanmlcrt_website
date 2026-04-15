@@ -36,6 +36,12 @@ export default async function Projects() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 border border-white/5">
+        {projects.length === 0 && (
+          <div className="col-span-full py-40 flex flex-col items-center justify-center border border-dashed border-white/10">
+            <span className="material-symbols-outlined text-4xl text-gray-700 mb-4 italic">database_off</span>
+            <p className="text-gray-600 font-headline text-xs tracking-widest uppercase">No data units found in dossier</p>
+          </div>
+        )}
         {projects.map((proj: any) => {
           const imageUrl = getStrapiMedia(proj.image?.url);
           

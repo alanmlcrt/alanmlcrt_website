@@ -10,9 +10,9 @@ export async function fetchStrapi(endpoint: string, options: RequestInit = {}) {
         const response = await fetch(`${STRAPI_URL}/api/${endpoint}`, {
             ...options,
             signal: controller.signal,
-            cache: isDev ? 'no-store' : 'default', // Don't cache in dev
+            cache: isDev ? 'no-store' : 'no-store', // Disable caching for more reliable real-time data
             next: { 
-                revalidate: isDev ? 0 : 60, // Update every minute instead of every hour
+                revalidate: 0, // Disable ISR for real-time updates
                 ...options.next 
             }
         });
