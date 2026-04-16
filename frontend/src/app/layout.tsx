@@ -51,6 +51,10 @@ export const metadata: Metadata = {
     description: "Portfolio d'Alan Molcrette, ingénieur en électronique, IoT et supervision de données.",
     images: ["/photo alan.jpg"],
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
