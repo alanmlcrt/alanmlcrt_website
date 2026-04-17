@@ -217,13 +217,8 @@ export default async function ProjectSingle({ params }: { params: Promise<{ slug
                     alt={project.title}
                     className="w-full h-auto transition-all duration-1000 scale-105 group-hover:scale-100"
                 />
-                {/* Telemetry Overlay */}
-                <div className="absolute top-4 left-4 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="bg-black/80 backdrop-blur-md px-2 py-1 border-l border-orange-500 text-[8px] text-orange-500 font-headline tracking-widest uppercase">COORD_X: 45.42</div>
-                    <div className="bg-black/80 backdrop-blur-md px-2 py-1 border-l border-orange-500 text-[8px] text-orange-500 font-headline tracking-widest uppercase">SYNC_RATE: 99.4%</div>
-                </div>
                 <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="bg-orange-600/20 backdrop-blur-md px-2 py-1 border border-orange-500/50 text-[8px] text-orange-500 font-headline tracking-widest uppercase">SOURCE: STRAPI_CMS</div>
+                    <div className="bg-orange-600/20 backdrop-blur-md px-2 py-1 border border-orange-500/50 text-[8px] text-orange-500 font-headline tracking-widest uppercase">IMG_REF // {project.title}</div>
                 </div>
             </div>
           )}

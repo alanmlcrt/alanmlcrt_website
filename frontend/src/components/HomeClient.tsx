@@ -73,16 +73,10 @@ export default function HomeClient() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 text-gray-400 font-light text-lg md:text-xl leading-relaxed">
                 <div className="space-y-8">
                   <p>
-                    <span className="text-white font-bold">Alan Molcrette</span> est un ingénieur diplômé en électronique et informatique spécialisé en <span className="text-orange-500">IoT</span>. Ce site est une plateforme dédiée au partage de projets techniques, d&apos;articles sur la supervision de données et l&apos;automatisation industrielle.
+                    Je ne cherche pas à juste créer un site vitrine de mon CV juste pour le rendre plus beau et pour dire “Moi j’ai un site”. <span className="text-orange-500 font-bold">Non</span>, le but est quand même de partager plus en détail mes expériences, mes découvertes et je ne me <span className="text-orange-500 font-bold">limiterai</span> pas à ce que je partage, si j’estime que cela en vaut la peine.
                   </p>
                   <p>
-                    L&apos;objectif est de proposer une vision concrète de mes compétences au-delà d&apos;un simple CV, en documentant des solutions réelles et des innovations dans les industries connectées.
-                  </p>
-                  <p>
-                    C&apos;est aussi un défi personnel : héberger mon propre site sur un VPS en partant de zéro. Cette infrastructure me servira pour tous mes futurs projets.
-                  </p>
-                  <p>
-                    J&apos;estime que juger une personne uniquement par un CV peut masquer, voire <span className="text-orange-500">discriminer</span>, des profils possédant une forte capacité d&apos;adaptation et un excellent savoir-être.
+                    J&apos;estime que juger une personne uniquement par un CV peut masquer des profils possédant une forte capacité d&apos;adaptation. Une personne ne se limite pas à quelques lignes sur une page blanche. C&apos;est aussi la raison pour laquelle ce site existe. Je veux pouvoir mettre en lumière mon <span className="text-orange-500 font-bold">savoir-faire</span> et mon <span className="text-orange-500 font-bold">savoir-être</span>.
                   </p>
                 </div>
                 <div className="space-y-8">
