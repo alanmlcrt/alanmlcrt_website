@@ -153,34 +153,6 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Connection Status Section */}
-      <section className="max-w-7xl mx-auto px-8 mb-40">
-        <SectionReveal>
-          <div className="border border-white/5 p-8 md:p-12 bg-white/[0.02] flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex items-center gap-6">
-              <div className="relative">
-                <div className="w-12 h-12 rounded-full border border-orange-600/30 flex items-center justify-center">
-                  <div className="w-3 h-3 bg-orange-600 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,107,0,1)]"></div>
-                </div>
-                <div className="absolute inset-0 border border-orange-600/10 rounded-full animate-ping"></div>
-              </div>
-              <div>
-                <p className="text-white font-headline text-sm tracking-widest uppercase mb-1">SYSTEM_STATUS: ACTIVE</p>
-                <p className="text-gray-500 font-headline text-[10px] tracking-[0.3em] uppercase">RÉPONSE TYPIQUE EN MOINS DE 24 HEURES</p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="px-6 py-2 border border-white/5 font-headline text-[10px] tracking-widest text-gray-500 uppercase">
-                LATENCY: 12ms
-              </div>
-              <div className="px-6 py-2 border border-white/5 font-headline text-[10px] tracking-widest text-gray-500 uppercase">
-                ENCRYPTION: AES-256
-              </div>
-            </div>
-          </div>
-        </SectionReveal>
-      </section>
 
       {/* Decorative Grid */}
       <div className="fixed inset-0 bg-[linear-gradient(rgba(255,107,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,107,0,0.02)_1px,transparent_1px)] bg-[size:100px_100px] pointer-events-none z-0"></div>
