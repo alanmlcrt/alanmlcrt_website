@@ -87,6 +87,7 @@ const markdownComponents = {
       {...props} 
     />
   ),
+  strong: ({node, ...props}: any) => <strong className="text-orange-500 font-bold" {...props} />,
   img: ({node, ...props}: any) => {
     const src = getStrapiMedia(props.src);
     
@@ -211,7 +212,7 @@ export default async function ProjectSingle({ params }: { params: Promise<{ slug
           </div>
 
           {imageUrl && (
-            <div className="w-full md:w-64 lg:w-80 shrink-0 bg-surface-container-low border border-white/5 overflow-hidden group relative">
+            <div className="w-full md:w-96 lg:w-[450px] shrink-0 bg-surface-container-low border border-white/5 overflow-hidden group relative shadow-2xl shadow-orange-600/5">
                 <img 
                     src={imageUrl} 
                     alt={project.title}
