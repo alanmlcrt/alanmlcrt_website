@@ -78,9 +78,9 @@ export default async function Projects() {
                     {proj.category || 'PROJECT'}
                   </p>
                   <p className={`text-[8px] font-headline tracking-tighter pl-3 ${
-                    (proj.status === 'published' || proj.status === 'publie') ? 'text-green-500/50' : 
-                    (proj.status === 'in_progress' || proj.status === 'en_cours') ? 'text-orange-500/50' : 
-                    (proj.status === 'archived' || proj.status === 'archive') ? 'text-red-500/50' : 'text-gray-500/50'
+                    (proj.status?.toLowerCase() === 'published' || proj.status?.toLowerCase() === 'publié') ? 'text-green-500/50' : 
+                    (proj.status?.toLowerCase() === 'in progress' || proj.status?.toLowerCase() === 'in_progress' || proj.status?.toLowerCase() === 'en cours') ? 'text-orange-500/50' : 
+                    (proj.status?.toLowerCase() === 'archived' || proj.status?.toLowerCase() === 'archive' || proj.status?.toLowerCase() === 'archivé') ? 'text-red-500/50' : 'text-gray-500/50'
                   }`}>STATUS: {((proj.status && proj.status.replace('_', ' ')) || 'ACTIVE').toUpperCase()}</p>
                 </div>
                 <span className="text-gray-800 font-headline text-xs group-hover:text-orange-600 transition-colors">ID_{proj.documentId?.slice(0, 6) || proj.id}</span>

@@ -196,14 +196,14 @@ export default async function ProjectSingle({ params }: { params: Promise<{ slug
                 <div>
                   <p className="text-gray-600 font-headline text-[10px] tracking-widest uppercase mb-1">STATUS</p>
                   <span className={`font-headline text-sm tracking-widest flex items-center gap-2 ${
-                    (project.status === 'published' || project.status === 'publie') ? 'text-green-500' : 
-                    (project.status === 'in_progress' || project.status === 'en_cours') ? 'text-orange-500' : 
-                    (project.status === 'archived' || project.status === 'archive') ? 'text-red-500' : 'text-gray-500'
+                    (project.status?.toLowerCase() === 'published' || project.status?.toLowerCase() === 'publié') ? 'text-green-500' : 
+                    (project.status?.toLowerCase() === 'in progress' || project.status?.toLowerCase() === 'in_progress' || project.status?.toLowerCase() === 'en cours') ? 'text-orange-500' : 
+                    (project.status?.toLowerCase() === 'archived' || project.status?.toLowerCase() === 'archive' || project.status?.toLowerCase() === 'archivé') ? 'text-red-500' : 'text-gray-500'
                   }`}>
                       <span className={`w-1.5 h-1.5 rounded-full ${
-                        (project.status === 'published' || project.status === 'publie') ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]' : 
-                        (project.status === 'in_progress' || project.status === 'en_cours') ? 'bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.4)]' : 
-                        (project.status === 'archived' || project.status === 'archive') ? 'bg-red-500' : 'bg-gray-500'
+                        (project.status?.toLowerCase() === 'published' || project.status?.toLowerCase() === 'publié') ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]' : 
+                        (project.status?.toLowerCase() === 'in progress' || project.status?.toLowerCase() === 'in_progress' || project.status?.toLowerCase() === 'en cours') ? 'bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.4)]' : 
+                        (project.status?.toLowerCase() === 'archived' || project.status?.toLowerCase() === 'archive' || project.status?.toLowerCase() === 'archivé') ? 'bg-red-500' : 'bg-gray-500'
                       }`}></span>
                       {(project.status || 'Active').replace('_', ' ').toUpperCase()}
                   </span>

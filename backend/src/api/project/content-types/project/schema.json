@@ -49,17 +49,7 @@
       ]
     },
     "status": {
-      "type": "enumeration",
-      "enum": [
-        "published",
-        "publie",
-        "draft",
-        "brouillon",
-        "in_progress",
-        "en_cours",
-        "archived",
-        "archive"
-      ]
+      "type": "string"
     },
     "tech_stack": {
       "type": "string"
