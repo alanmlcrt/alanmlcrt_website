@@ -98,9 +98,9 @@ const markdownComponents = {
           <img 
               src={src}
               alt={props.alt || "Project image"}
-              className="max-w-full max-h-[70vh] w-auto h-auto object-contain border border-white/5 grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-[1.01]" 
+              className="max-w-full max-h-[70vh] w-auto h-auto object-contain border border-white/5 transition-all duration-700 hover:scale-[1.01]" 
           />
-          <span className="absolute -bottom-4 left-0 text-[10px] text-gray-600 font-headline tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">IMG_REF // {props.alt}</span>
+          <span className="absolute -bottom-6 left-0 text-[10px] text-gray-500 font-headline tracking-widest uppercase border-l border-orange-600/50 pl-2">IMG_REF // {props.alt}</span>
       </span>
     );
   },

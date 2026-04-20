@@ -54,7 +54,7 @@ export default async function Projects() {
                   src={imageUrl} 
                   alt={proj.title} 
                   fill 
-                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                  className="object-cover transition-all duration-700"
                 />
               </div>
             )}
