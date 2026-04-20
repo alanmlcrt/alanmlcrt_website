@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { fetchStrapi, getStrapiMedia } from "@/lib/strapi";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import ShareButton from "@/components/ShareButton";
 
 const siteUrl = "https://alanmlcrt.fr";
 
@@ -256,9 +257,7 @@ export default async function ProjectSingle({ params }: { params: Promise<{ slug
 
       <div className="mt-40 pt-12 border-t border-white/5 flex justify-between items-center">
         <div className="flex gap-4">
-          <button className="w-12 h-12 flex items-center justify-center border border-white/10 hover:border-orange-500/50 hover:text-orange-400 transition-colors">
-             <span className="material-symbols-outlined text-base">share</span>
-          </button>
+          <ShareButton />
         </div>
         <Link href="/projects" className="border border-orange-600/30 text-orange-600 px-12 py-4 font-headline font-bold uppercase tracking-[0.3em] text-[10px] hover:bg-orange-600/10 transition-all duration-300">
            TERMINATE_SESSION // EXIT

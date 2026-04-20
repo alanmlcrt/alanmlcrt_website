@@ -11,7 +11,7 @@ export const metadata = {
 };
 
 export default async function Projects() {
-  const projects = await fetchStrapi('projects?populate=*');
+  const projects = await fetchStrapi('projects?populate=*&sort=date:desc');
 
   return (
     <div className="max-w-7xl mx-auto px-8 py-20 w-full">
