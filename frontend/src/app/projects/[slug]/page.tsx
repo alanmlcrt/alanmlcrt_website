@@ -196,16 +196,16 @@ export default async function ProjectSingle({ params }: { params: Promise<{ slug
                 <div>
                   <p className="text-gray-600 font-headline text-[10px] tracking-widest uppercase mb-1">STATUS</p>
                   <span className={`font-headline text-sm tracking-widest flex items-center gap-2 ${
-                    (project.status === 'Published' || project.status === 'Publié') ? 'text-green-500' : 
-                    (project.status === 'In Progress' || project.status === 'En cours') ? 'text-orange-500' : 
-                    (project.status === 'Archived' || project.status === 'Archivé') ? 'text-red-500' : 'text-gray-500'
+                    (project.status === 'published' || project.status === 'publie') ? 'text-green-500' : 
+                    (project.status === 'in_progress' || project.status === 'en_cours') ? 'text-orange-500' : 
+                    (project.status === 'archived' || project.status === 'archive') ? 'text-red-500' : 'text-gray-500'
                   }`}>
                       <span className={`w-1.5 h-1.5 rounded-full ${
-                        (project.status === 'Published' || project.status === 'Publié') ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]' : 
-                        (project.status === 'In Progress' || project.status === 'En cours') ? 'bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.4)]' : 
-                        (project.status === 'Archived' || project.status === 'Archivé') ? 'bg-red-500' : 'bg-gray-500'
+                        (project.status === 'published' || project.status === 'publie') ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]' : 
+                        (project.status === 'in_progress' || project.status === 'en_cours') ? 'bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.4)]' : 
+                        (project.status === 'archived' || project.status === 'archive') ? 'bg-red-500' : 'bg-gray-500'
                       }`}></span>
-                      {project.status}
+                      {(project.status || 'Active').replace('_', ' ').toUpperCase()}
                   </span>
                 </div>
               )}

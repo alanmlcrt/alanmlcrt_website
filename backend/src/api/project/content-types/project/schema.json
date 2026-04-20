@@ -51,14 +51,14 @@
     "status": {
       "type": "enumeration",
       "enum": [
-        "Published",
-        "Publié",
-        "Draft",
-        "Brouillon",
-        "In Progress",
-        "En cours",
-        "Archived",
-        "Archivé"
+        "published",
+        "publie",
+        "draft",
+        "brouillon",
+        "in_progress",
+        "en_cours",
+        "archived",
+        "archive"
       ]
     },
     "tech_stack": {
