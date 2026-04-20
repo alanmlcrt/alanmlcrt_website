@@ -29,7 +29,6 @@ export default function AboutClient({ data }: { data: any }) {
   const profileQuote = data.profileQuote || '"Mon parcours est guidé par une volonté de comprendre les systèmes dans leur globalité. De l\'électronique pure au déploiement logiciel, je vois chaque projet comme un puzzle complexe à optimiser pour l\'utilisateur final."';
   const profileSummary = data.profileSummary || "Ingénieur diplômé en électronique et informatique, spécialisé en IoT. Je souhaite mettre mes compétences au service de projets innovants au sein d'industries connectées pour optimiser les processus et valoriser la donnée.";
   const profileApproach = data.profileApproach || "Rigueur, curiosité et autonomie me permettent de m'adapter rapidement à de nouveaux environnements technologiques complexes.";
-  const profileObjective = data.profileObjective || "Contribuer au déploiement de solutions robustes pour l'automatisation et la supervision de flux de données critiques.";
   
   const experiences = data.experiences && data.experiences.length > 0 ? data.experiences : [
     { title: "MAINTENANCE & DÉV. POWER BI", company: "ENEDIS", date: "FÉVRIER 2026 — AUJOURD'HUI", description: "Modernisation des processus métier via l'évolution d'outils digitaux. Gain de temps et amélioration de l'expérience utilisateur.", isCurrent: true },
@@ -100,7 +99,7 @@ export default function AboutClient({ data }: { data: any }) {
       </section>
 
       {/* Profil Section */}
-      <section id="philosophy" className="max-w-7xl mx-auto px-8 mb-64 scroll-mt-24">
+      <section id="philosophy" className="max-w-7xl mx-auto px-8 mb-32 scroll-mt-24">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
           <div className="md:col-span-5">
             <SectionReveal direction="right">
@@ -114,9 +113,9 @@ export default function AboutClient({ data }: { data: any }) {
                       alt="Alan Molcrette" 
                       fill 
                       priority
-                      className="object-cover grayscale hover:grayscale-0 transition-all duration-700" 
+                      className="object-cover grayscale group-hover:grayscale-0 group-hover:brightness-110 transition-all duration-700" 
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-700"></div>
                     
                     <div className="absolute top-8 left-8">
                         <div className="w-16 h-16 rounded-full bg-orange-600/20 p-0.5 opacity-90 backdrop-blur-md shadow-[0_0_20px_rgba(255,107,0,0.3)] border border-orange-600/50">
@@ -158,15 +157,9 @@ export default function AboutClient({ data }: { data: any }) {
               </div>
               <div className="space-y-8 text-gray-400 text-xl leading-relaxed font-light">
                 <p>{profileSummary}</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8 border-t border-white/5">
-                    <div>
-                        <h4 className="text-white font-headline text-xs tracking-widest font-bold mb-4 uppercase">Approche</h4>
-                        <p className="text-gray-500 text-base leading-relaxed">{profileApproach}</p>
-                    </div>
-                    <div>
-                        <h4 className="text-white font-headline text-xs tracking-widest font-bold mb-4 uppercase">Objectif</h4>
-                        <p className="text-gray-500 text-base leading-relaxed">{profileObjective}</p>
-                    </div>
+                <div className="pt-8 border-t border-white/5">
+                    <h4 className="text-white font-headline text-xs tracking-widest font-bold mb-4 uppercase">Soft Skills</h4>
+                    <p className="text-gray-400 text-lg leading-relaxed">{profileApproach}</p>
                 </div>
               </div>
             </SectionReveal>
@@ -175,7 +168,7 @@ export default function AboutClient({ data }: { data: any }) {
       </section>
 
       {/* Experiences Section */}
-      <section id="timeline" className="py-40 border-y border-white/5 mb-64 scroll-mt-24 relative overflow-hidden bg-black/40">
+      <section id="timeline" className="py-24 border-y border-white/5 mb-32 scroll-mt-24 relative overflow-hidden bg-black/40">
         <div className="max-w-7xl mx-auto px-8 relative z-10">
           <SectionReveal>
             <div className="mb-24">
@@ -237,7 +230,7 @@ export default function AboutClient({ data }: { data: any }) {
       </section>
 
       {/* Stack Section */}
-      <section id="stack" className="max-w-7xl mx-auto px-8 mb-64 scroll-mt-24">
+      <section id="stack" className="max-w-7xl mx-auto px-8 mb-32 scroll-mt-24">
         <SectionReveal>
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
             <div>
@@ -263,7 +256,7 @@ export default function AboutClient({ data }: { data: any }) {
 
       {/* Projects Section */}
       {featuredProjects.length > 0 && (
-        <section id="projects" className="max-w-7xl mx-auto px-8 mb-64 scroll-mt-24">
+        <section id="projects" className="max-w-7xl mx-auto px-8 mb-32 scroll-mt-24">
           <SectionReveal>
               <div className="flex items-center gap-4 mb-20">
                   <Rocket className="text-orange-600" size={24} />
@@ -311,7 +304,7 @@ export default function AboutClient({ data }: { data: any }) {
       )}
 
       {/* Education & Info Section */}
-      <section id="education" className="max-w-7xl mx-auto px-8 mb-40 scroll-mt-24">
+      <section id="education" className="max-w-7xl mx-auto px-8 mb-24 scroll-mt-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <SectionReveal direction="right">
                 <div className="space-y-12">
@@ -394,7 +387,7 @@ export default function AboutClient({ data }: { data: any }) {
       </section>
 
       {/* CTA Section */}
-      <section className="max-w-7xl mx-auto px-8 mb-40">
+      <section className="max-w-7xl mx-auto px-8 mb-24">
         <SectionReveal>
           <div className="bg-[#050505] p-16 md:p-32 relative overflow-hidden border border-white/5">
             <CircuitBackground active={ctaActive} originX={0.5} originY={0.72} />

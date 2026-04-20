@@ -35,9 +35,7 @@
     "profileApproach": {
       "type": "text"
     },
-    "profileObjective": {
-      "type": "text"
-    },
+
     "profileQuote": {
       "type": "text"
     },
