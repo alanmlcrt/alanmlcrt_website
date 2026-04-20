@@ -28,10 +28,10 @@ const websiteSchema = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Alan Molcrette | Ingénieur IoT, Data Supervision et Portfolio",
+    default: "Alan Molcrette | Ingénieur en électronique et informatique | Portfolio",
     template: "%s | Alan Molcrette",
   },
-  description: "Portfolio d'Alan Molcrette, ingénieur en électronique, IoT et supervision de données.",
+  description: "Portfolio d'Alan Molcrette, ingénieur en électronique et informatique | Projets IoT et systèmes connectés.",
   applicationName: "alanmlcrt",
   authors: [{ name: "Alan Molcrette", url: siteUrl }],
   creator: "Alan Molcrette",
@@ -40,15 +40,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     url: siteUrl,
-    title: "Alan Molcrette | Ingénieur IoT, Data Supervision et Portfolio",
-    description: "Portfolio d'Alan Molcrette, ingénieur en électronique, IoT et supervision de données.",
+    title: "Alan Molcrette | Ingénieur en électronique et informatique | Portfolio",
+    description: "Portfolio d'Alan Molcrette, ingénieur en électronique et informatique | Projets IoT et systèmes connectés.",
     siteName: "alanmlcrt",
     images: ["/photo alan.jpg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alan Molcrette | Ingénieur IoT, Data Supervision et Portfolio",
-    description: "Portfolio d'Alan Molcrette, ingénieur en électronique, IoT et supervision de données.",
+    title: "Alan Molcrette | Ingénieur en électronique et informatique | Portfolio",
+    description: "Portfolio d'Alan Molcrette, ingénieur en électronique et informatique | Projets IoT et systèmes connectés.",
     images: ["/photo alan.jpg"],
   },
   robots: {

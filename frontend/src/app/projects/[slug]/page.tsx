@@ -45,8 +45,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title,
     description,
     alternates: {
-      canonical: `/projects/${slug}`,
+      canonical: project.seo?.canonicalURL || `/projects/${slug}`,
     },
+    robots: project.seo?.metaRobots || "index, follow",
     openGraph: {
       title,
       description,
@@ -194,8 +195,16 @@ export default async function ProjectSingle({ params }: { params: Promise<{ slug
               {project.status && (
                 <div>
                   <p className="text-gray-600 font-headline text-[10px] tracking-widest uppercase mb-1">STATUS</p>
-                  <span className="text-green-500 font-headline text-sm tracking-widest flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                  <span className={`font-headline text-sm tracking-widest flex items-center gap-2 ${
+                    project.status === 'Published' ? 'text-green-500' : 
+                    project.status === 'In Progress' ? 'text-orange-500' : 
+                    project.status === 'Archived' ? 'text-red-500' : 'text-gray-500'
+                  }`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${
+                        project.status === 'Published' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]' : 
+                        project.status === 'In Progress' ? 'bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.4)]' : 
+                        project.status === 'Archived' ? 'bg-red-500' : 'bg-gray-500'
+                      }`}></span>
                       {project.status}
                   </span>
                 </div>

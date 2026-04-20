@@ -77,7 +77,11 @@ export default async function Projects() {
                   <p className="text-gray-600 font-headline text-[10px] tracking-widest uppercase border-l border-orange-600/30 pl-3">
                     {proj.category || 'PROJECT'}
                   </p>
-                  <p className="text-[8px] text-green-500/50 font-headline tracking-tighter pl-3">STATUS: ACTIVE</p>
+                  <p className={`text-[8px] font-headline tracking-tighter pl-3 ${
+                    proj.status === 'Published' ? 'text-green-500/50' : 
+                    proj.status === 'In Progress' ? 'text-orange-500/50' : 
+                    proj.status === 'Archived' ? 'text-red-500/50' : 'text-gray-500/50'
+                  }`}>STATUS: {(proj.status || 'ACTIVE').toUpperCase()}</p>
                 </div>
                 <span className="text-gray-800 font-headline text-xs group-hover:text-orange-600 transition-colors">ID_{proj.documentId?.slice(0, 6) || proj.id}</span>
               </div>
