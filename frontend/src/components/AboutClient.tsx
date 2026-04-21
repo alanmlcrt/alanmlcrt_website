@@ -99,7 +99,7 @@ export default function AboutClient({ data }: { data: any }) {
       </section>
 
       {/* Profil Section */}
-      <section id="philosophy" className="max-w-7xl mx-auto px-8 mb-32 scroll-mt-24">
+      <section id="philosophy" className="max-w-7xl mx-auto px-8 mb-16 scroll-mt-24">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
           <div className="md:col-span-5">
             <SectionReveal direction="right">
@@ -168,7 +168,7 @@ export default function AboutClient({ data }: { data: any }) {
       </section>
 
       {/* Experiences Section */}
-      <section id="timeline" className="py-24 border-y border-white/5 mb-32 scroll-mt-24 relative overflow-hidden bg-black/40">
+      <section id="timeline" className="py-12 border-y border-white/5 mb-32 scroll-mt-24 relative overflow-hidden bg-black/40">
         <div className="max-w-7xl mx-auto px-8 relative z-10">
           <SectionReveal>
             <div className="mb-24">
