@@ -79,9 +79,7 @@ export default {
                   seoDescription: 'Portfolio d\'Alan Molcrette, ingénieur en électronique, IoT et supervision de données.',
                   email: 'molcrette.alan@gmail.com',
                   linkedinUrl: 'https://www.linkedin.com/in/alan-molcrette/',
-                  profileSummary: "Ingénieur diplômé en électronique et informatique, spécialisé en IoT. Je souhaite mettre mes compétences au service de projets innovants au sein d'industries connectées pour optimiser les processus et valoriser la donnée.",
                   profileApproach: "Rigueur, curiosité et autonomie me permettent de m'adapter rapidement à de nouveaux environnements technologiques complexes.",
-                  profileObjective: "Contribuer au déploiement de solutions robustes pour l'automatisation et la supervision de flux de données critiques.",
                   profileQuote: "Mon parcours est guidé par une volonté de comprendre les systèmes dans leur globalité. De l'électronique pure au déploiement logiciel, je vois chaque projet comme un puzzle complexe à optimiser pour l'utilisateur final.",
                   experiences: [
                     { title: "MAINTENANCE & DÉV. POWER BI", company: "ENEDIS", date: "FÉVRIER 2026 — AUJOURD'HUI", description: "Modernisation des processus métier via l'évolution d'outils digitaux. Gain de temps et amélioration de l'expérience utilisateur.", isCurrent: true },

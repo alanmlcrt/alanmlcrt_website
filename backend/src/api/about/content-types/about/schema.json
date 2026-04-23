@@ -29,9 +29,6 @@
     "linkedinUrl": {
       "type": "string"
     },
-    "profileSummary": {
-      "type": "text"
-    },
     "profileApproach": {
       "type": "text"
     },
