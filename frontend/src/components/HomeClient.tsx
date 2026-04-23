@@ -27,7 +27,6 @@ export default function HomeClient() {
           <SectionReveal delay={0.2}>
             <p className="text-body text-2xl text-gray-400 mb-16 font-light max-w-2xl mx-auto leading-relaxed">
               Ingénieur diplômé en <span className="text-white">éléctronique et informatique, spécialisé en IoT</span>.
-              Optimisation des processus et supervision de données critiques.
             </p>
           </SectionReveal>
 
