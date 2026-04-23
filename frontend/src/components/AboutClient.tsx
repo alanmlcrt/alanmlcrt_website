@@ -27,6 +27,7 @@ export default function AboutClient({ data }: { data: any }) {
   const email = data.email || "molcrette.alan@gmail.com";
   const linkedinUrl = data.linkedinUrl || "https://www.linkedin.com/in/alan-molcrette/";
   const profileQuote = data.profileQuote || '"Mon parcours est guidé par une volonté de comprendre les systèmes dans leur globalité. De l\'électronique pure au déploiement logiciel, je vois chaque projet comme un puzzle complexe à optimiser pour l\'utilisateur final."';
+  const profileSummary = data.profileSummary || "Ingénieur diplômé en électronique et informatique, spécialisé en IoT. Je souhaite mettre mes compétences au service de projets innovants au sein d'industries connectées pour optimiser les processus et valoriser la donnée.";
   const profileApproach = data.profileApproach || "Rigueur, curiosité et autonomie me permettent de m'adapter rapidement à de nouveaux environnements technologiques complexes.";
   
   const experiences = data.experiences && data.experiences.length > 0 ? data.experiences : [
@@ -152,10 +153,14 @@ export default function AboutClient({ data }: { data: any }) {
             <SectionReveal direction="left" delay={0.2}>
               <div className="flex items-center gap-4 mb-8">
                 <span className="material-symbols-outlined text-orange-600 text-3xl text-glow">person_search</span>
-                <h2 className="font-headline text-3xl font-bold tracking-tight text-white uppercase text-glow-primary">APPROCHE // SOFT_SKILLS</h2>
+                <h2 className="font-headline text-3xl font-bold tracking-tight text-white uppercase text-glow-primary">PROFIL // RÉSUMÉ_SYSTÈME</h2>
               </div>
               <div className="space-y-8 text-gray-400 text-xl leading-relaxed font-light">
-                <p className="text-gray-400 text-lg leading-relaxed">{profileApproach}</p>
+                <p>{profileSummary}</p>
+                <div className="pt-8 border-t border-white/5">
+                    <h4 className="text-white font-headline text-xs tracking-widest font-bold mb-4 uppercase">Soft Skills</h4>
+                    <p className="text-gray-400 text-lg leading-relaxed">{profileApproach}</p>
+                </div>
               </div>
             </SectionReveal>
           </div>

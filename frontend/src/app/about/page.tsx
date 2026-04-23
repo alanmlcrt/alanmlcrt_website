@@ -18,10 +18,9 @@ export async function generateMetadata() {
   const aboutData = await getAboutData();
   const seo = aboutData?.seo;
   const heroSubtitle = aboutData?.heroSubtitle || "Ingénieur Industries Connectées // IoT // Data Supervision";
-  const profileApproach = aboutData?.profileApproach || "Rigueur, curiosité et autonomie me permettent de m'adapter rapidement à de nouveaux environnements technologiques complexes.";
-  const description = seo?.metaDescription || aboutData?.seoDescription || `${heroSubtitle}. ${profileApproach}`;
+  const profileSummary = aboutData?.profileSummary || "Découvrez mon parcours d'ingénieur en électronique et informatique spécialisé en IoT et Dataviz.";
+  const description = seo?.metaDescription || aboutData?.seoDescription || `${heroSubtitle}. ${profileSummary}`;
   const title = seo?.metaTitle || aboutData?.seoTitle || "À Propos | Alan Molcrette";
-
   return {
     title,
     description,
