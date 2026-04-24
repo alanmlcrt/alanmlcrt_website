@@ -77,7 +77,7 @@ export default function Contact() {
 
                 <h2 className="font-headline text-white font-black text-4xl mb-4 tracking-tighter uppercase text-glow-primary">EMAIL</h2>
                 <p className="text-gray-400 font-light text-lg mb-12 max-w-xs">
-                  Si vous voulez en apprendre d'avantage sur mon profil ou pour toute autre question, contactez moi !
+                  Si vous voulez en apprendre davantage sur mon profil ou pour toute autre question, contactez moi !
                 </p>
               </div>
 
