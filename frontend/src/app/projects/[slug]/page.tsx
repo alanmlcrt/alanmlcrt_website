@@ -14,9 +14,6 @@ async function getProject(slug: string) {
 }
 
 function buildProjectDescription(project: any) {
-  const seoDescription = project?.seoDescription;
-  if (seoDescription) return seoDescription;
-
   const content = String(project?.content || "")
     .replace(/[#*_>`\[\]()]/g, " ")
     .replace(/\s+/g, " ")
@@ -38,17 +35,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   }
 
-  const imageUrl = getStrapiMedia(project.seo?.metaImage?.url || project.image?.url);
-  const title = project.seo?.metaTitle || project.title;
-  const description = project.seo?.metaDescription || buildProjectDescription(project);
+  const imageUrl = getStrapiMedia(project.image?.url);
+  const title = project.title;
+  const description = buildProjectDescription(project);
 
   return {
     title,
     description,
     alternates: {
-      canonical: project.seo?.canonicalURL || `/projects/${slug}`,
+      canonical: `/projects/${slug}`,
     },
-    robots: project.seo?.metaRobots || "index, follow",
+    robots: "index, follow",
     openGraph: {
       title,
       description,
@@ -119,8 +116,8 @@ export default async function ProjectSingle({ params }: { params: Promise<{ slug
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: project.seo?.metaTitle || project.title,
-    description: project.seo?.metaDescription || buildProjectDescription(project),
+    headline: project.title,
+    description: buildProjectDescription(project),
     datePublished: project.date,
     dateModified: project.updatedAt || project.date,
     url: `${siteUrl}/projects/${slug}`,
