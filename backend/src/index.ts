@@ -20,16 +20,6 @@ export default {
     strapi.log.info('--- BOOTSTRAP STARTING ---');
 
     try {
-      strapi.log.info('Running migration: clearing Project UI configuration to prevent admin crash...');
-      await strapi.db.query('strapi::core-store').deleteMany({
-        where: {
-          key: {
-            $startsWith: 'plugin_content_manager_configuration_content_types::api::project.project'
-          }
-        }
-      });
-      strapi.log.info('Migration complete.');
-
       const publicRole = await strapi.db.query('plugin::users-permissions.role').findOne({
         where: { type: 'public' }
       });
