@@ -63,8 +63,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 const markdownComponents = {
+  h1: ({node, ...props}: any) => <h1 className="text-white font-headline text-4xl font-black mt-20 mb-10 uppercase tracking-tighter border-b border-white/10 pb-4" {...props} />,
   h2: ({node, ...props}: any) => <h2 className="text-white font-headline text-3xl font-bold mt-16 mb-8 uppercase tracking-tight border-l-4 border-orange-600 pl-6" {...props} />,
-  h3: ({node, ...props}: any) => <h3 className="text-orange-500 font-headline text-xl font-bold mt-12 mb-6 uppercase tracking-widest" {...props} />,
+  h3: ({node, ...props}: any) => <h3 className="text-orange-500 font-headline text-2xl font-bold mt-12 mb-6 uppercase tracking-widest flex items-center gap-3"><span className="w-8 h-[1px] bg-orange-500/50"></span>{props.children}</h3>,
+  h4: ({node, ...props}: any) => <h4 className="text-white font-headline text-xl font-semibold mt-10 mb-4 tracking-wider" {...props} />,
+  h5: ({node, ...props}: any) => <h5 className="text-gray-300 font-headline text-lg font-medium mt-8 mb-4 tracking-wide" {...props} />,
+  h6: ({node, ...props}: any) => <h6 className="text-gray-400 font-headline text-base font-medium mt-8 mb-4" {...props} />,
   blockquote: ({node, ...props}: any) => (
     <blockquote className="border-l-4 border-orange-600/30 bg-orange-600/5 p-8 my-10 italic text-gray-300 relative" {...props}>
         <span className="absolute top-4 left-4 text-6xl text-orange-600/10 font-black leading-none pointer-events-none select-none">“</span>
