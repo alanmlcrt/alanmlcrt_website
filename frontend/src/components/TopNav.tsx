@@ -38,18 +38,18 @@ export default function TopNav() {
           <span className="text-glow">alanmlcrt</span>
           <span className="w-1.5 h-1.5 rounded-full bg-orange-600 shadow-[0_0_10px_rgba(255,107,0,1)] group-hover:animate-ping"></span>
         </Link>
-        
+
         {/* Desktop Navigation */}
         <div className="hidden md:flex gap-12 items-center">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
-              <Link 
+              <Link
                 key={link.href}
                 href={link.href}
                 className={`font-headline tracking-tighter uppercase text-sm transition-all duration-300 hover:scale-105
-                  ${isActive 
-                    ? "text-orange-500 border-b-2 border-orange-500 pb-1" 
+                  ${isActive
+                    ? "text-orange-500 border-b-2 border-orange-500 pb-1"
                     : "text-gray-400 hover:text-orange-400"
                   }`}
               >
@@ -61,7 +61,7 @@ export default function TopNav() {
         </div>
 
         {/* Mobile Hamburger Button */}
-        <button 
+        <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden p-2 text-orange-600 hover:bg-orange-600/10 transition-colors"
           aria-label="Toggle menu"
@@ -82,13 +82,13 @@ export default function TopNav() {
           >
             {/* Background Decorative Element */}
             <div className="absolute top-0 right-0 w-full h-full opacity-5 pointer-events-none overflow-hidden">
-               <div className="absolute top-[20%] right-[-10%] w-[500px] h-[500px] bg-orange-600 blur-[120px] rounded-full"></div>
-               <div className="absolute bottom-[10%] left-[-10%] w-[300px] h-[300px] bg-orange-600 blur-[100px] rounded-full"></div>
+              <div className="absolute top-[20%] right-[-10%] w-[500px] h-[500px] bg-orange-600 blur-[120px] rounded-full"></div>
+              <div className="absolute bottom-[10%] left-[-10%] w-[300px] h-[300px] bg-orange-600 blur-[100px] rounded-full"></div>
             </div>
 
             <div className="mb-12">
-               <p className="text-orange-600 font-headline text-[10px] tracking-[0.4em] uppercase mb-2">SYSTEM_NAVIGATION // READY</p>
-               <div className="h-[2px] w-12 bg-orange-600"></div>
+              <p className="text-orange-600 font-headline text-[10px] tracking-[0.4em] uppercase mb-2">SYSTEM_NAVIGATION // READY</p>
+              <div className="h-[2px] w-12 bg-orange-600"></div>
             </div>
 
             <div className="flex flex-col gap-8">
@@ -101,7 +101,7 @@ export default function TopNav() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.1 + 0.2 }}
                   >
-                    <Link 
+                    <Link
                       href={link.href}
                       className={`font-headline text-4xl font-black tracking-widest uppercase flex items-center gap-4 group
                         ${isActive ? "text-orange-600 text-glow" : "text-gray-600 hover:text-white"}`}

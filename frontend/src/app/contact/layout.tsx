@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contact // alanmlcrt",
-  description: "Entrez en contact avec Alan Molcrette pour vos projets IoT, Electronique et Data Supervision.",
+  description: "Entrez en contact avec Alan Molcrette pour vos projets IoT, Électronique et Data Supervision.",
   alternates: {
     canonical: "/contact",
   },
